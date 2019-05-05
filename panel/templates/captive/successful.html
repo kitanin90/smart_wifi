@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="{% static 'captive/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'captive/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'captive/css/style.css' %}">
+
+    <script src="{% static 'captive/js/jquery.min.js' %}"></script>
+    <script src="{% static 'captive/js/bootstrap.min.js' %}"></script>
+
+    <title>Успешная авторизация</title>
+</head>
+<body class="login-page" style="background: url({% static 'captive/img/frost.jpg' %});">
+<main>
+    <div class="login-block">
+        <img src="{% static 'captive/img/new21.png' %}" alt="Scanfcode" class="img-responsive center-block"
+             style="width: 100%;">
+        <h1>Поздравляем, вы подключены!</h1>
+        <div class="form-group">
+            <button type="buttom" class="btn btn-primary btn-lg"
+                    onClick='location.href="http://strbsu.ru/"'>Перейти на сайт СФ БГУ
+            </button>
+            <hr class="hr-xs">
+            <button type="buttom" class="btn btn-primary btn-lg"
+                    onClick='location.href="http://edu.strbsu.ru/"'>Узнать расписание
+            </button>
+            <hr class="hr-xs">
+        </div>
+    </div>
+</main>
+</body>
+</html>
