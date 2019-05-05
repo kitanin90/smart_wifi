@@ -6,14 +6,17 @@
     <meta charset="UTF-8">
     <title>Авторизация</title>
 
-    <link rel="stylesheet" href="{% static 'captive/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'captive/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'captive/css/style.css' %}">
 
-    <script src="{% static 'captive/js/jquery.min.js' %}"></script>
-    <script src="{% static 'captive/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'vendor/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap.min.js' %}"></script>
+
     <script src="{% static 'captive/js/ChilliLibrary.js' %}"></script>
 
+    <!--suppress NonAsciiCharacters -->
     <script>
         function onUpdate(cmd) {
             if (chilliController.clientState === 1) {
@@ -36,7 +39,6 @@
             chilliController.logon(rus_to_latin(name), password);
         }
 
-
         function rus_to_latin(str) {
             var ru = {
                 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
@@ -52,7 +54,7 @@
             for (var i = 0; i < str.length; ++i) {
                 n_str.push(
                     ru[str[i]]
-                    || ru[str[i].toLowerCase()] == undefined && str[i]
+                    || ru[str[i].toLowerCase()] === undefined && str[i]
                     || ru[str[i].toLowerCase()].replace(/^(.)/, function (match) {
                         return match.toUpperCase()
                     })
@@ -89,7 +91,7 @@
             </div>
         </div>
 
-        <button type="buttom" class="btn btn-primary btn-lg" onclick="onClick();">Подключиться</button>
+        <button class="btn btn-primary btn-lg" onclick="onClick();">Подключиться</button>
 
         <div class="login-footer">
         </div>

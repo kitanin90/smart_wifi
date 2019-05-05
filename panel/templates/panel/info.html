@@ -1,0 +1,62 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}Факультеты{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'panel/css/info.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'layout/menu.html' %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-2" style="padding-left: 15px">
+                <div class="left-panel">
+                    <h2>Данные пользователя:</h2>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Введите ФИО</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="Иванов Иван Иванович">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Введите Факультет</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="ПиП">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="panel">
+                    <div class="w-100 p-3" style="background-color: #eee;">
+                        <h3>Трафик</h3>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">За Сегодня</th>
+                                <th scope="col">За неделю</th>
+                                <th scope="col">За месяц</th>
+                                <th scope="col">За все время</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>10</td>
+                                <td>100</td>
+                                <td>500</td>
+                                <td>561351351</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
