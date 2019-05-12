@@ -1,0 +1,72 @@
+html {
+    overflow-x: hidden;
+}
+
+.navbar {
+    padding: 0
+}
+
+/* убираем стандартные отступы */
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+    font-weight: 600
+}
+
+/* меняем цвет ссылок в меню и толщину шрифта */
+li.nav-item.active, li.nav-item:hover, li.nav-item:focus {
+    background-color: #007bff
+}
+
+/* делаем заливку для активного этлемента и элементов при наведении */
+
+.btn-group {
+    padding: 0
+}
+
+.dropdown-toggle, .dropdown-toggle:active {
+    color: #fff;
+    font-weight: 600
+}
+
+li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dropdown-item:focus {
+    background-color: #007bff
+}
+
+.dropdown-item {
+    font-family: "Lucida Console", serif
+}
+
+.left-panel {
+    background-color: #DCDCDC;
+    text-align: center;
+    padding: 10px;
+}
+
+.panel {
+    background-color: #DCDCDC;
+    height: 1000px;
+}
+
+.navbar-brand {
+    margin-left: 50px;
+    font-family: "Lucida Console", serif
+}
+
+
+h3 {
+    font-family: "Lucida Console", serif;
+    text-align: center;
+    padding-top: 15px;
+
+}
+
+h2 {
+    font-family: "Lucida Console", serif;
+    color: #000;
+    font-weight: 100;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}

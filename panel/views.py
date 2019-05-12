@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from panel.models import Faculty, Client
+from panel.models import Faculty, Client, Building, NAS
 
 
 @require_http_methods(["GET"])
@@ -26,7 +26,21 @@ def index(request):
 
 @require_http_methods(["GET"])
 def point(request):
-    return render(request, 'panel/point.html')
+    building_list = Building.objects.all()
+    nas_list = None
+
+    if "building_id" in request.GET:
+        building_id = request.GET["building_id"]
+        building = Building.objects.get(id=building_id)
+        nas_list = NAS.objects.filter(building=building)
+
+    return render(request, 'panel/point.html', {"building_list": building_list, "nas_list": nas_list})
+
+@require_http_methods(["GET"])
+def nas(request, nas_id):
+    nas = NAS.objects.get(id=nas_id)
+
+    return render(request, 'panel/nas.html', {"nas": nas})
 
 
 @require_http_methods(["GET"])

@@ -8,7 +8,10 @@ urlpatterns = [
 
     path('panel/auth', views.auth, name='auth'),
     path('panel', views.index, name='index'),
+
+    # Point
     path('panel/point', views.point, name='point'),
+    path('panel/nas/<int:nas_id>', views.nas, name='nas'),
 
     # Users
     path('panel/clients', views.clients, name='clients'),

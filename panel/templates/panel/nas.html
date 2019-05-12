@@ -1,10 +1,10 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 
-{% block title %}Факультеты{% endblock %}
+{% block title %}Роутера{% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'panel/css/client.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/css/nas.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,36 +15,32 @@
 
             <div class="col-md-2" style="padding-left: 15px">
                 <div class="left-panel">
-                    <h2>Данные пользователя:</h2>
+                    <h2>Данные роутера:</h2>
                     <div class="form-group">
-                        <label for="lastname">Фамилия</label>
-                        <input type="email" class="form-control" id="lastname" value="{{ client.lastname }}" disabled>
+                        <label for="lastname">Название</label>
+                        <input type="email" class="form-control" id="name" value="{{ nas.name }}" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="firstname">Имя</label>
-                        <input type="email" class="form-control" id="firstname" value="{{ client.firstname }}" disabled>
+                        <label for="firstname">IP</label>
+                        <input type="email" class="form-control" id="firstname" value="{{ nas.ip }}" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="patronymic">Отчество</label>
-                        <input type="email" class="form-control" id="patronymic" value="{{ client.patronymic }}"
+                        <label for="patronymic">Тип</label>
+                        <input type="email" class="form-control" id="patronymic" value="{{ nas.type }}"
                                disabled>
                     </div>
                     <div class="form-group">
-                        <label for="faculty">Факультет</label>
-                        <input type="email" class="form-control" id="faculty" value="{{ client.faculty.name }}"
+                        <label for="faculty">Секрет</label>
+                        <input type="email" class="form-control" id="faculty" value="{{ nas.secret }}"
                                disabled>
                     </div>
                     <div class="form-group">
-                        <label for="telephone">Телефон</label>
-                        <input type="email" class="form-control" id="telephone" value="{{ client.telephone }}" disabled>
+                        <label for="telephone">Сервер</label>
+                        <input type="email" class="form-control" id="telephone" value="{{ nas.server }}" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="email" class="form-control" id="username" value="{{ client.username }}" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Статус</label>
-                        <input type="email" class="form-control" id="status" value="{{ client.status }}" disabled>
+                        <label for="username">Корпус</label>
+                        <input type="email" class="form-control" id="username" value="{{ nas.building }}" disabled>
                     </div>
                 </div>
             </div>

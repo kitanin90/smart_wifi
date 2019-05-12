@@ -17,48 +17,48 @@
                 <div class="left-panel">
                     <h2>Корпус:</h2>
                     <div class="content">
-                        <p><a href="">Факультет Математики и Информационных Технологий</a></p>
-                        <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                        <p><a href="">Естественнонаучный факультет</a></p>
-                        <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                        <p><a href="">Факультет педагогики и психологии</a></p>
-                        <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                        <p><a href="">Факультет Педагогики и Психологи</a></p>
-                        <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                        <p><a href="">Экономический факультет</a></p>
-                        <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                        <p><a href="">Юридический факультет</a></p>
+                          {% for building in building_list %}
+                              <p><a href="{% url "point" %}?building_id={{ building.id }}">{{ building.name }}</a></p>
+                              <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
+                          {% empty %}
+                              <p>Нет корпусов</p>
+                          {% endfor %}
                     </div>
                 </div>
             </div>
 
             <div class="col-md-10">
                 <div class="w-100 p-3" style="background-color: #eee;">
-                    <h3>Точки доступа</h3>
+                {% if nas_list is not None %}
+                    <h3>Список роутеров</h3>
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Название</th>
-                            <th scope="col">Пароль</th>
+                            <th scope="col">IP</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Сервер</th>
+                            <th scope="col">Корпус</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Роутрер 1</td>
-                            <td>1234124</td>
-                        </tr>
-                        </tbody>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Роутрер 1</td>
-                            <td>12432</td>
-                        </tr>
-                        </tbody>
+                {% for nas in nas_list %}
 
+                        <tr>
+                          <th scope="row"><a href="{% url "nas" nas.id %}">{{ nas.id }}</a></th>
+                            <td>{{ nas.name }}</td>
+                            <td>{{ nas.ip }}</td>
+                            <td>{{ nas.type }}</td>
+                            <td>{{ nas.server }}</td>
+                            <td>{{ nas.building }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
                     </table>
+                    {% else %}
+                        <h3>Выберите корпус</h3>
+                    {% endif %}
                 </div>
             </div>
         </div>
