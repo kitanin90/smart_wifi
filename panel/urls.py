@@ -8,7 +8,9 @@ urlpatterns = [
 
     path('panel/auth', views.auth, name='auth'),
     path('panel', views.index, name='index'),
-    path('panel/info', views.info, name='info'),
     path('panel/point', views.point, name='point'),
-    path('panel/users', views.users, name='users'),
+
+    # Users
+    path('panel/clients', views.clients, name='clients'),
+    path('panel/clients/<int:client_id>', views.client, name='client'),
 ]

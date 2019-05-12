@@ -4,7 +4,7 @@
 {% block title %}Факультеты{% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'panel/css/info.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/css/client.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -17,16 +17,35 @@
                 <div class="left-panel">
                     <h2>Данные пользователя:</h2>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Введите ФИО</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="Иванов Иван Иванович">
+                        <label for="lastname">Фамилия</label>
+                        <input type="email" class="form-control" id="lastname" value="{{ client.lastname }}" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Введите Факультет</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="ПиП">
+                        <label for="firstname">Имя</label>
+                        <input type="email" class="form-control" id="firstname" value="{{ client.firstname }}" disabled>
                     </div>
-
+                    <div class="form-group">
+                        <label for="patronymic">Отчество</label>
+                        <input type="email" class="form-control" id="patronymic" value="{{ client.patronymic }}"
+                               disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="faculty">Факультет</label>
+                        <input type="email" class="form-control" id="faculty" value="{{ client.faculty.name }}"
+                               disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Телефон</label>
+                        <input type="email" class="form-control" id="telephone" value="{{ client.telephone }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="email" class="form-control" id="username" value="{{ client.username }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Статус</label>
+                        <input type="email" class="form-control" id="status" value="{{ client.status }}" disabled>
+                    </div>
                 </div>
             </div>
 

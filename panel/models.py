@@ -140,10 +140,7 @@ class NAS(models.Model):
     secret = models.CharField(max_length=60)
     server = models.CharField(max_length=64, blank=True, null=True)
 
-    faculty = models.ForeignKey("Faculty", on_delete=models.DO_NOTHING)
     building = models.ForeignKey("Building", on_delete=models.DO_NOTHING)
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
     def __str__(self):
-        return "{} ({})".format(self.name, self.faculty.name)
+        return "{} ({})".format(self.name, self.building.name)
