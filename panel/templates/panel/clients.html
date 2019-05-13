@@ -4,61 +4,61 @@
 {% block title %}Факультеты{% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'panel/css/clients.css' %}">
+<link rel="stylesheet" href="{% static 'panel/css/clients.css' %}">
 {% endblock %}
 
 {% block content %}
-    {% include 'layout/menu.html' %}
+{% include 'layout/menu.html' %}
 
-    <div class="container-fluid">
-        <div class="row">
+<div class="container-fluid">
+    <div class="row">
 
-            <div class="col-md-2" style="padding-left: 15px">
-                <div class="left-panel">
-                    <h2>Факультеты:</h2>
-                    <div class="content">
-                        {% for faculty in faculty_list %}
-                            <p><a href="{% url "clients" %}?faculty_id={{ faculty.id }}">{{ faculty.name }}</a></p>
-                            <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                        {% empty %}
-                            <p>Нет факультетов</p>
-                        {% endfor %}
-                    </div>
+        <div class="col-md-2" style="padding-left: 15px">
+            <div class="left-panel">
+                <h2>Факультеты:</h2>
+                <div class="content">
+                    {% for faculty in faculty_list %}
+                    <p><a href="{% url "clients" %}?faculty_id={{ faculty.id }}">{{ faculty.name }}</a></p>
+                    <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
+                    {% empty %}
+                    <p>Нет факультетов</p>
+                    {% endfor %}
                 </div>
             </div>
-            
-            <div class="col-md-10">
-                <div class="panel">
-                    <div class="w-100 p-3" style="background-color: #eee;">
-                        {% if client_list is not None %}
-                            <h3>Список пользователей факультета:</h3>
-                            <table class="table">
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Фамилия</th>
-                                    <th scope="col">Имя</th>
-                                    <th scope="col">Зачетная книжка</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for client in client_list %}
+        </div>
 
-                                    <tr>
-                                        <th scope="row"><a href="{% url "client" client.id %}">{{ client.id }}</a></th>
-                                        <td>{{ client.lastname }}</td>
-                                        <td>{{ client.firstname }}</td>
-                                        <td></td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        {% else %}
-                            <h3>Выберите факультет</h3>
-                        {% endif %}
-                    </div>
+        <div class="col-md-10">
+            <div class="panel">
+                <div class="w-100 p-3" style="background-color: #eee;">
+                    {% if client_list is not None %}
+                    <h3>Список пользователей факультета:</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Фамилия</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Зачетная книжка</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for client in client_list %}
+
+                        <tr>
+                            <th scope="row"><a href="{% url "client" client.id %}">{{ client.id }}</a></th>
+                            <td>{{ client.lastname }}</td>
+                            <td>{{ client.firstname }}</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <h3>Выберите факультет</h3>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

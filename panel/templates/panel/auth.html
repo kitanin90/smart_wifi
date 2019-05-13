@@ -4,43 +4,43 @@
 {% block title %}Авторизация{% endblock %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'panel/css/auth.css' %}">
+<link rel="stylesheet" href="{% static 'panel/css/auth.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="d-flex justify-content-center h-100">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Вход</h3>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="username">
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Вход</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="username">
 
-                        </div>
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input type="password" class="form-control" placeholder="password">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Войти" class="btn login_btn">
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <div class="d-flex justify-content-center links">Нет доступа?</div>
-                    <div class="d-flex justify-content-center">
-                        <a href="#">Обратись в ЦИТ</a>
                     </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Войти" class="btn login_btn">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">Нет доступа?</div>
+                <div class="d-flex justify-content-center">
+                    <a href="#">Обратись в ЦИТ</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

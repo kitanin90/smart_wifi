@@ -1,0 +1,96 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}Факультеты{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'panel/css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'layout/menu.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="left-panel">
+                <h2>Суммарный трафик:</h2>
+
+                <div class="card" style="width: 17rem;">
+                  <h4><img class="card-img-top" src="..." alt="Сегодня"></h4>
+                      <div class="card-body">
+                          <p class="card-text">100 Гб/32 Гб</p>
+                      </div>
+                </div>
+
+                <div class="card" style="width: 17rem;">
+                  <h4><img class="card-img-top" src="..." alt="Неделя"></h4>
+                      <div class="card-body">
+                        <p class="card-text">250 Гб/500 Гб</p>
+                      </div>
+                </div>
+
+                <div class="card" style="width: 17rem;">
+                  <h4><img class="card-img-top" src="..." alt="Месяц"></h4>
+                      <div class="card-body">
+                        <p class="card-text">750 Гб/1100 Гб</p>
+                      </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <div class="panel">
+
+                <div class="w-100 p-3" style="background-color: #eee;">
+                    <h3>Топ 10 пользователей по трафику:</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">День</th>
+                            <th scope="col">Неделю</th>
+                            <th scope="col">Месяц</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>username</td>
+                            <td>100</td>
+                            <td>500</td>
+                            <td>561351351</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                        <div class="w-100 p-3" style="background-color: #eee;">
+                            <h3 >Топ 10 точек по трафику</h3>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Точка</th>
+                                  <th scope="col">День</th>
+                                  <th scope="col">Неделю</th>
+                                  <th scope="col">Месяц</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>10</td>
+                                    <td>100</td>
+                                    <td>500</td>
+                                    <td>561351351</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+              </div>
+          </div>
+    </div>
+</div>
+{% endblock %}

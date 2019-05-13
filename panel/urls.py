@@ -16,4 +16,7 @@ urlpatterns = [
     # Users
     path('panel/clients', views.clients, name='clients'),
     path('panel/clients/<int:client_id>', views.client, name='client'),
+
+    # Dashboard
+    path('panel/dashboard', views.dashboard, name='dashboard'),
 ]
