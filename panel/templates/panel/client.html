@@ -15,37 +15,52 @@
 
             <div class="col-md-2" style="padding-left: 15px">
                 <div class="left-panel">
-                    <h2>Данные пользователя:</h2>
-                    <div class="form-group">
-                        <label for="lastname">Фамилия</label>
-                        <input type="email" class="form-control" id="lastname" value="{{ client.lastname }}" disabled>
+
+                    <h3>Данные пользователя:</h3>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Фамилия:</span></h4>
+                        <div class="card-body">
+                            <input type="email" class="form-control" id="lastname" value="{{ client.lastname }}" disabled>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="firstname">Имя</label>
-                        <input type="email" class="form-control" id="firstname" value="{{ client.firstname }}" disabled>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Имя:</span></h4>
+                        <div class="card-body">
+                            <input type="email" class="form-control" id="firstname" value="{{ client.firstname }}" disabled>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="patronymic">Отчество</label>
-                        <input type="email" class="form-control" id="patronymic" value="{{ client.patronymic }}"
-                               disabled>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Отчество:</span></h4>
+                        <div class="card-body">
+                            <input type="email" class="form-control" id="patronymic" value="{{ client.patronymic }}" disabled>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="faculty">Факультет</label>
-                        <input type="email" class="form-control" id="faculty" value="{{ client.faculty.name }}"
-                               disabled>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Факультет:</span></h4>
+                        <div class="card-body">
+                            <input type="email" class="form-control" id="faculty" value="{{ client.faculty.name }}" disabled>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="telephone">Телефон</label>
-                        <input type="email" class="form-control" id="telephone" value="{{ client.telephone }}" disabled>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Телефон:</span></h4>
+                        <div class="card-body">
+                            <input type="email" class="form-control" id="telephone" value="{{ client.telephone }}" disabled>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="email" class="form-control" id="username" value="{{ client.username }}" disabled>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Username</span></h4>
+                        <div class="card-body">
+                            <input type="email" class="form-control" id="username" value="{{ client.username }}" disabled>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="status">Статус</label>
-                        <input type="email" class="form-control" id="status" value="{{ client.status }}" disabled>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Статус:</span></h4>
+                        <div class="card-body">
+                            <input type="email" class="form-control" id="status" value="{{ client.status }}" disabled>
+                        </div>
                     </div>
+
+
                 </div>
             </div>
 

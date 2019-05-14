@@ -44,7 +44,7 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 
 .panel {
     background-color: #DCDCDC;
-    height: 1000px;
+    height: auto;
 }
 
 .navbar-brand {

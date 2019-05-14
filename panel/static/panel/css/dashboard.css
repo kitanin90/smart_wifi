@@ -36,16 +36,13 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
     font-family: "Lucida Console", serif
 }
 
-.left-panel {
-    background-color: #DCDCDC;
+.left-panel-fluid {
+
     text-align: center;
     padding: 5px;
+    margin-left: 10px;
 }
 
-.panel {
-    background-color: #DCDCDC;
-    height: 278px;
-}
 
 .navbar-brand {
     margin-left: 50px;
@@ -63,7 +60,7 @@ h3 {
 
 h2 {
     font-family: "Lucida Console", serif;
-    color: #FFA500;
+    color: white;
     font-weight: 700;
     font-style: italic;
 }
@@ -82,4 +79,20 @@ h4{
   color: #00008B;
   font-weight:800;
 ﻿
+}
+
+.p-3{
+    padding: 0rem !important;
+}
+
+.col-md-10{
+    margin-top: 10px;
+}
+
+.w-100{
+    border-radius: 10px;
+}
+
+.badge{
+    float:center;
 }
