@@ -4,9 +4,8 @@ services:
   db:
     image: mysql:5.7.26
     restart: always
-    environment:
-      MYSQL_DATABASE: smart_wifi
-      MYSQL_ROOT_PASSWORD:
+    env_file:
+      - .env
     ports:
       - "3306:3306"
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
@@ -14,13 +13,19 @@ services:
     build: .
     command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     restart: always
+    env_file:
+      - .env
     ports:
       - "80:8000"
+    volumes:
+      - ./:/code
     depends_on:
       - db
   freeradius:
     build: ./freeradius/
     restart: always
+    env_file:
+      - .env
     ports:
       - "1812:1812/udp"
       - "1813:1813/udp"

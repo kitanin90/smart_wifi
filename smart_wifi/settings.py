@@ -19,12 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = eval(os.getenv('ALLOWED_HOSTS'))
 
 # Application definition
 
@@ -74,10 +74,10 @@ WSGI_APPLICATION = 'smart_wifi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'smart_wifi',
+        'NAME': os.getenv('MYSQL_DATABASE'),
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD'),
+        'HOST': 'db',
         'PORT': '3306',
     }
 }

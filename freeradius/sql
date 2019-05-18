@@ -91,10 +91,12 @@ sql {
 	server = "db"
 	port = 3306
 	login = "root"
-	password = ""
+	# password = "{MYSQL_ROOT_PASSWORD}"
+	password = "19823711"
 
 	# Database table configuration for everything except Oracle
-	radius_db = "smart_wifi"
+	# radius_db = "{MYSQL_DATABASE}"
+    radius_db = "smart_wifi"
 
 	# If you are using Oracle then use this instead
 #	radius_db = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=your_sid)))"

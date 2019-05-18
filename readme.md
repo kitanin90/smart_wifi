@@ -1,7 +1,6 @@
 # smart_wifi
 
 ## Запуск
-* Скопировать `settings.example.py` в `settings.py` и отредактировать настройки
-* Выполнить миграции `python manage.py migrate`
-* Создать администратора `python manage.py createsuperuser`
-* Запустить debug-сервер `python manage.py runserver`
+* Скопировать `.env.example` в `.env` и отредактировать настройки
+* Запустить `docker-compose up -d`
+* Создать суперпользователя `docker-compose exec web python3 manage.py createsuperuser`
