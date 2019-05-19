@@ -43,6 +43,11 @@ class Client(models.Model):
             upload=Sum("acctoutputoctets") / BYTES_IN_MB
         )
 
+    def get_time_from_date(self, date):
+        return Session.objects.filter(acctstarttime__gte=date, username=self.username).aggregate(
+            time=Sum("acctsessiontime") / 60
+        )
+
 
 class ClientParameter(models.Model):
     username = models.CharField(max_length=64)

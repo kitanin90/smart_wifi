@@ -74,6 +74,10 @@ def client(request, client_id):
     week_traffic = client.get_traffic_from_date(now - timedelta(days=7))
     day_traffic = client.get_traffic_from_date(now - timedelta(days=1))
 
+    month_time = client.get_time_from_date(now - timedelta(days=30))
+    week_time = client.get_time_from_date(now - timedelta(days=7))
+    day_time = client.get_time_from_date(now - timedelta(days=1))
+
     return render(request, 'panel/client.html',
                   {"client": client, "month_traffic": month_traffic, "week_traffic": week_traffic,
-                   "day_traffic": day_traffic})
+                   "day_traffic": day_traffic, "month_time": month_time, "week_time": week_time, "day_time": day_time})
