@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from . import dashboard
 
 urlpatterns = [
     path('', views.connect, name='connect'),
@@ -9,7 +10,7 @@ urlpatterns = [
     path('panel/auth', views.auth, name='auth'),
 
     # Dashboard
-    path('panel/', views.dashboard, name='dashboard'),
+    path('panel/', dashboard.index, name='dashboard'),
 
     # Point
     path('panel/points', views.points, name='points'),

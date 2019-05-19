@@ -59,8 +59,3 @@ def client(request, client_id):
     client = Client.objects.get(id=client_id)
 
     return render(request, 'panel/client.html', {"client": client})
-
-
-@require_http_methods(["GET"])
-def dashboard(request):
-    return render(request, 'panel/dashboard.html')

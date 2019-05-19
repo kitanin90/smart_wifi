@@ -4,100 +4,100 @@
 {% block title %}Главная{% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'panel/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'panel/css/dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
-{% include 'layout/menu.html' %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="left-panel-fluid">
-                <h2>Статистика:</h2>
+    {% include 'layout/menu.html' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="left-panel-fluid">
+                    <h2>Статистика:</h2>
 
-                <div class="card" style="width: auto;">
-                   <h4><span class="badge badge-success">Трафик за сегодня:</span></h4>
-                      <div class="card-body">
-                          <p class="card-text">100 Гб/32 Гб</p>
-                      </div>
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-success">Трафик за сегодня:</span></h4>
+                        <div class="card-body">
+                            <p class="card-text">{{ day_traffic.download }} Мб / {{ day_traffic.upload }} Мб</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-warning">Трафик за неделю:</span></h4>
+                        <div class="card-body">
+                            <p class="card-text">{{ week_traffic.download }} Мб / {{ week_traffic.upload }} Мб</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: auto;">
+                        <h4><span class="badge badge-primary">Трафик за месяц:</span></h4>
+                        <div class="card-body">
+                            <p class="card-text">{{ month_traffic.download }} Мб / {{ month_traffic.upload }} Мб</p>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
 
-                <div class="card" style="width: auto;">
-                  <h4><span class="badge badge-warning">Трафик за неделю:</span></h4>
-                      <div class="card-body">
-                        <p class="card-text">250 Гб/500 Гб</p>
-                      </div>
+            <div class="col-md-10">
+                <div class="panel">
+
+                    <div class="w-100 p-3" style="background-color: #eee;">
+                        <h3>Топ 10 пользователей по трафику:</h3>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">День</th>
+                                <th scope="col">Неделю</th>
+                                <th scope="col">Месяц</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Username1</td>
+                                <td>100</td>
+                                <td>500</td>
+                                <td>561351351</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>username</td>
+                                <td>100</td>
+                                <td>500</td>
+                                <td>561351351</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="w-100 p-3" style="background-color: #eee;">
+                        <h3>Топ 10 точек по трафику</h3>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Точка</th>
+                                <th scope="col">День</th>
+                                <th scope="col">Неделю</th>
+                                <th scope="col">Месяц</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>ФМиИТ</td>
+                                <td>100</td>
+                                <td>500</td>
+                                <td>561351351</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <div class="card" style="width: auto;">
-                  <h4><span class="badge badge-primary">Трафик за месяц:</span></h4>
-                      <div class="card-body">
-                        <p class="card-text">750 Гб/1100 Гб</p>
-                      </div>
-                </div>
-
             </div>
         </div>
-
-        <div class="col-md-10">
-            <div class="panel">
-
-                <div class="w-100 p-3" style="background-color: #eee;">
-                    <h3>Топ 10 пользователей по трафику:</h3>
-                    <table class="table">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">День</th>
-                            <th scope="col">Неделю</th>
-                            <th scope="col">Месяц</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Username1</td>
-                            <td>100</td>
-                            <td>500</td>
-                            <td>561351351</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>username</td>
-                            <td>100</td>
-                            <td>500</td>
-                            <td>561351351</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                        <div class="w-100 p-3" style="background-color: #eee;">
-                            <h3 >Топ 10 точек по трафику</h3>
-                            <table class="table">
-                                <thead class="thead-dark">
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">Точка</th>
-                                  <th scope="col">День</th>
-                                  <th scope="col">Неделю</th>
-                                  <th scope="col">Месяц</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>ФМиИТ</td>
-                                    <td>100</td>
-                                    <td>500</td>
-                                    <td>561351351</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-              </div>
-          </div>
     </div>
-</div>
 {% endblock %}
