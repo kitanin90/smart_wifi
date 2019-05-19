@@ -64,20 +64,16 @@
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">За Сегодня</th>
                             <th scope="col">За неделю</th>
                             <th scope="col">За месяц</th>
-                            <th scope="col">За все время</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>10</td>
-                            <td>100</td>
-                            <td>500</td>
-                            <td>561351351</td>
+                            <td>{{ day_traffic.download }} МБ / {{ day_traffic.upload }} МБ</td>
+                            <td>{{ week_traffic.download }} МБ / {{ week_traffic.upload }} МБ</td>
+                            <td>{{ month_traffic.download }} МБ / {{ month_traffic.upload }} МБ</td>
                         </tr>
                         </tbody>
                     </table>

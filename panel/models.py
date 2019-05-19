@@ -1,5 +1,7 @@
-from django.conf import settings
 from django.db import models
+from django.db.models import Sum
+
+from panel.const import BYTES_IN_MB
 
 
 class Building(models.Model):
@@ -34,6 +36,12 @@ class Client(models.Model):
 
     def __str__(self):
         return self.fullname()
+
+    def get_traffic_from_date(self, date):
+        return Session.objects.filter(acctstarttime__gte=date, username=self.username).aggregate(
+            download=Sum("acctinputoctets") / BYTES_IN_MB,
+            upload=Sum("acctoutputoctets") / BYTES_IN_MB
+        )
 
 
 class ClientParameter(models.Model):
@@ -146,3 +154,9 @@ class NAS(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.name, self.building.name)
+
+    def get_traffic_from_date(self, date):
+        return Session.objects.filter(acctstarttime__gte=date, calledstationid=self.mac).aggregate(
+            download=Sum("acctinputoctets") / BYTES_IN_MB,
+            upload=Sum("acctoutputoctets") / BYTES_IN_MB
+        )

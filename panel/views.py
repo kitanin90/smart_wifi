@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
+from datetime import timedelta
+from django.utils import timezone
 from panel.models import Faculty, Client, Building, NAS
 
 
@@ -36,7 +38,15 @@ def points(request):
 def point(request, nas_id):
     nas = NAS.objects.get(id=nas_id)
 
-    return render(request, 'panel/point.html', {"nas": nas})
+    now = timezone.now()
+
+    month_traffic = nas.get_traffic_from_date(now - timedelta(days=30))
+    week_traffic = nas.get_traffic_from_date(now - timedelta(days=7))
+    day_traffic = nas.get_traffic_from_date(now - timedelta(days=1))
+
+    return render(request, 'panel/point.html',
+                  {"nas": nas, "month_traffic": month_traffic, "week_traffic": week_traffic,
+                   "day_traffic": day_traffic})
 
 
 @require_http_methods(["GET"])
@@ -58,4 +68,12 @@ def clients(request):
 def client(request, client_id):
     client = Client.objects.get(id=client_id)
 
-    return render(request, 'panel/client.html', {"client": client})
+    now = timezone.now()
+
+    month_traffic = client.get_traffic_from_date(now - timedelta(days=30))
+    week_traffic = client.get_traffic_from_date(now - timedelta(days=7))
+    day_traffic = client.get_traffic_from_date(now - timedelta(days=1))
+
+    return render(request, 'panel/client.html',
+                  {"client": client, "month_traffic": month_traffic, "week_traffic": week_traffic,
+                   "day_traffic": day_traffic})
