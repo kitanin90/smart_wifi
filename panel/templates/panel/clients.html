@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 
-{% block title %}Факультеты{% endblock %}
+{% block title %}Клиенты{% endblock %}
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'panel/css/clients.css' %}">
@@ -31,14 +31,15 @@
             <div class="panel">
                 <div class="w-100 p-3" style="background-color: #eee;">
                     {% if client_list is not None %}
-                    <h3>Список пользователей факультета:</h3>
+                    <h3>Список пользователей {{ faculty }}:</h3>
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Фамилия</th>
                             <th scope="col">Имя</th>
-                            <th scope="col">Зачетная книжка</th>
+                            <th scope="col">Отчество</th>
+                            <th scope="col">Номер зачётной книжки</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,7 @@
                             <th scope="row"><a href="{% url "client" client.id %}">{{ client.id }}</a></th>
                             <td>{{ client.lastname }}</td>
                             <td>{{ client.firstname }}</td>
+                            <td>{{ client.patronymic }}</td>
                             <td></td>
                         </tr>
                         {% endfor %}

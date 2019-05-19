@@ -1,10 +1,10 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 
-{% block title %}Факультеты{% endblock %}
+{% block title %}Точка доступа{% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'panel/css/point.css' %}">
+<link rel="stylesheet" href="{% static 'panel/css/nas.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,50 +15,61 @@
 
         <div class="col-md-2" style="padding-left: 15px">
             <div class="left-panel">
-                <h2>Корпус:</h2>
-                <div class="content">
-                    {% for building in building_list %}
-                    <p><a href="{% url "point" %}?building_id={{ building.id }}">{{ building.name }}</a></p>
-                    <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                    {% empty %}
-                    <p>Нет корпусов</p>
-                    {% endfor %}
+                <h2>Данные роутера:</h2>
+                <div class="form-group">
+                    <label for="lastname">Название</label>
+                    <input type="email" class="form-control" id="name" value="{{ nas.name }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">IP</label>
+                    <input type="email" class="form-control" id="firstname" value="{{ nas.ip }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="patronymic">Тип</label>
+                    <input type="email" class="form-control" id="patronymic" value="{{ nas.type }}"
+                           disabled>
+                </div>
+                <div class="form-group">
+                    <label for="faculty">Секрет</label>
+                    <input type="email" class="form-control" id="faculty" value="{{ nas.secret }}"
+                           disabled>
+                </div>
+                <div class="form-group">
+                    <label for="telephone">Сервер</label>
+                    <input type="email" class="form-control" id="telephone" value="{{ nas.server }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="username">Корпус</label>
+                    <input type="email" class="form-control" id="username" value="{{ nas.building }}" disabled>
                 </div>
             </div>
         </div>
 
         <div class="col-md-10">
-            <div class="w-100 p-3" style="background-color: #eee;">
-                {% if nas_list is not None %}
-                <h3>Список роутеров</h3>
-                <table class="table">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">IP</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Сервер</th>
-                        <th scope="col">Корпус</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for nas in nas_list %}
-
-                    <tr>
-                        <th scope="row"><a href="{% url "nas" nas.id %}">{{ nas.id }}</a></th>
-                        <td>{{ nas.name }}</td>
-                        <td>{{ nas.ip }}</td>
-                        <td>{{ nas.type }}</td>
-                        <td>{{ nas.server }}</td>
-                        <td>{{ nas.building }}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                <h3>Выберите корпус</h3>
-                {% endif %}
+            <div class="panel">
+                <div class="w-100 p-3" style="background-color: #eee;">
+                    <h3>Трафик</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">За Сегодня</th>
+                            <th scope="col">За неделю</th>
+                            <th scope="col">За месяц</th>
+                            <th scope="col">За все время</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>10</td>
+                            <td>100</td>
+                            <td>500</td>
+                            <td>561351351</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

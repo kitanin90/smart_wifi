@@ -7,16 +7,15 @@ urlpatterns = [
     path('successful', views.successful_connect, name='successful_connect'),
 
     path('panel/auth', views.auth, name='auth'),
-    path('panel', views.index, name='index'),
+
+    # Dashboard
+    path('panel/', views.dashboard, name='dashboard'),
 
     # Point
-    path('panel/point', views.point, name='point'),
-    path('panel/nas/<int:nas_id>', views.nas, name='nas'),
+    path('panel/points', views.points, name='points'),
+    path('panel/point/<int:nas_id>', views.point, name='point'),
 
     # Users
     path('panel/clients', views.clients, name='clients'),
     path('panel/clients/<int:client_id>', views.client, name='client'),
-
-    # Dashboard
-    path('panel/dashboard', views.dashboard, name='dashboard'),
 ]

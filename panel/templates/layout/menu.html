@@ -11,15 +11,16 @@
             <div class="collapse navbar-collapse" id="navbar1" style="margin-left:114px;">
                 <ul class="navbar-nav mr-auto">
 
-                    <li class="nav-item active">
+                    <li class="nav-item {% if request.resolver_match.url_name == "dashboard" %} active {% endif %}">
                         <a class="nav-link" href="{% url "dashboard" %}">Главная</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "clients" %}">Пользователи</a>
+
+                    <li class="nav-item {% if request.resolver_match.url_name == "clients" %} active {% endif %}">
+                        <a class="nav-link" href="{% url "clients" %}">Клиенты</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "point" %}">Точки доступа</a>
+                    <li class="nav-item {% if request.resolver_match.url_name == "points" %} active {% endif %}">
+                        <a class="nav-link" href="{% url "points" %}">Точки доступа</a>
                     </li>
 
                     <li class="nav-item">
