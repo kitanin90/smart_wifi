@@ -37,14 +37,12 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 }
 
 .left-panel {
-    background-color: #DCDCDC;
     text-align: center;
-    padding: 10px;
+    padding-left:10px;
 }
-
 .panel {
     background-color: #DCDCDC;
-    height: auto;
+    height: 278px;
 }
 
 .navbar-brand {
@@ -56,17 +54,16 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 h3 {
     font-family: "Lucida Console", serif;
     text-align: center;
-    padding-top: 15px;
+    padding-top: 1px;
+    color: white;
 
-}
-
-h2 {
-    font-family: "Lucida Console", serif;
-    color: #000;
-    font-weight: 100;
 }
 
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
+}
+
+.w-100 h3{
+    color:blue;
 }

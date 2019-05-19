@@ -15,33 +15,45 @@
 
         <div class="col-md-2" style="padding-left: 15px">
             <div class="left-panel">
-                <h2>Данные роутера:</h2>
-                <div class="form-group">
-                    <label for="lastname">Название</label>
-                    <input type="email" class="form-control" id="name" value="{{ nas.name }}" disabled>
+
+                <h3>Данные точки доступа:</h3>
+                <div class="card" style="width: auto;">
+                    <h4><span class="badge badge-warning">Название:</span></h4>
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="name" value="{{ nas.name }}" disabled>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="firstname">IP</label>
-                    <input type="email" class="form-control" id="firstname" value="{{ nas.ip }}" disabled>
+                <div class="card" style="width: auto;">
+                    <h4><span class="badge badge-warning">IP:</span></h4>
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="ip" value="{{ nas.ip }}" disabled>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="patronymic">Тип</label>
-                    <input type="email" class="form-control" id="patronymic" value="{{ nas.type }}"
-                           disabled>
+                <div class="card" style="width: auto;">
+                    <h4><span class="badge badge-warning">Тип:</span></h4>
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="type" value="{{ nas.type }}" disabled>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="faculty">Секрет</label>
-                    <input type="email" class="form-control" id="faculty" value="{{ nas.secret }}"
-                           disabled>
+                <div class="card" style="width: auto;">
+                    <h4><span class="badge badge-warning">Secret:</span></h4>
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="secret" value="{{ nas.secret }}" disabled>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="telephone">Сервер</label>
-                    <input type="email" class="form-control" id="telephone" value="{{ nas.server }}" disabled>
+                <div class="card" style="width: auto;">
+                    <h4><span class="badge badge-warning">MAC:</span></h4>
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="mac" value="{{ nas.mac }}" disabled>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="username">Корпус</label>
-                    <input type="email" class="form-control" id="username" value="{{ nas.building }}" disabled>
+                <div class="card" style="width: auto;">
+                    <h4><span class="badge badge-warning">Корпус</span></h4>
+                    <div class="card-body">
+                        <input type="text" class="form-control" id="building" value="{{ nas.building }}" disabled>
+                    </div>
                 </div>
+
             </div>
         </div>
 
