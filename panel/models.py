@@ -91,6 +91,7 @@ class Session(models.Model):
     acctuniqueid = models.CharField(max_length=32)
 
     username = models.CharField(max_length=64)
+
     realm = models.CharField(max_length=64, null=True)
 
     nasipaddress = models.CharField(max_length=15)
@@ -139,6 +140,7 @@ class NAS(models.Model):
     ports = models.IntegerField(null=True)
     secret = models.CharField(max_length=60)
     server = models.CharField(max_length=64, blank=True, null=True)
+    mac = models.CharField(max_length=50)
 
     building = models.ForeignKey("Building", on_delete=models.DO_NOTHING)
 

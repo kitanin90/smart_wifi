@@ -43,56 +43,45 @@
                 <div class="panel">
 
                     <div class="w-100 p-3" style="background-color: #eee;">
-                        <h3>Топ 10 пользователей по трафику:</h3>
+                        <h3>Топ 10 клиентов по трафику за месяц:</h3>
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">День</th>
-                                <th scope="col">Неделю</th>
-                                <th scope="col">Месяц</th>
+                                <th scope="col">Клиент</th>
+                                <th scope="col">Факультет</th>
+                                <th scope="col">Трафик</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Username1</td>
-                                <td>100</td>
-                                <td>500</td>
-                                <td>561351351</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>username</td>
-                                <td>100</td>
-                                <td>500</td>
-                                <td>561351351</td>
-                            </tr>
+                            {% for client in top_clients %}
+                                <tr>
+                                    <td>{{ client.obj.fullname }}</td>
+                                    <td>{{ client.obj.faculty }}</td>
+                                    <td>{{ client.traffic }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
 
                     <div class="w-100 p-3" style="background-color: #eee;">
-                        <h3>Топ 10 точек по трафику</h3>
+                        <h3>Топ 10 точек по трафику за месяц:</h3>
                         <table class="table">
                             <thead class="thead-dark">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Точка</th>
-                                <th scope="col">День</th>
-                                <th scope="col">Неделю</th>
-                                <th scope="col">Месяц</th>
+                                <th scope="col">Точка доступа</th>
+                                <th scope="col">Корпус</th>
+                                <th scope="col">Трафик</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>ФМиИТ</td>
-                                <td>100</td>
-                                <td>500</td>
-                                <td>561351351</td>
-                            </tr>
+                            {% for point in top_points %}
+                                <tr>
+                                    <td>{{ point.obj.name }}</td>
+                                    <td>{{ point.obj.building }}</td>
+                                    <td>{{ point.traffic }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
