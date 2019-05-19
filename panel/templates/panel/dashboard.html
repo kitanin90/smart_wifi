@@ -55,7 +55,7 @@
                             <tbody>
                             {% for client in top_clients %}
                                 <tr>
-                                    <td>{{ client.obj.fullname }}</td>
+                                    <td><a href="{% url 'client' client.obj.id %}">{{ client.obj.fullname }}</a></td>
                                     <td>{{ client.obj.faculty }}</td>
                                     <td>{{ client.traffic }}</td>
                                 </tr>
@@ -77,7 +77,7 @@
                             <tbody>
                             {% for point in top_points %}
                                 <tr>
-                                    <td>{{ point.obj.name }}</td>
+                                    <td><a href="{% url "point" point.obj.id %}">{{ point.obj.name }}</a></td>
                                     <td>{{ point.obj.building }}</td>
                                     <td>{{ point.traffic }}</td>
                                 </tr>
