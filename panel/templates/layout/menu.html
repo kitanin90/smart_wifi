@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container" style="margin-left: 10px;">
+        <div class="container-fluid" style="margin-left: 10px;">
             <a class="navbar-brand" href="#">СФ БашГУ</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,6 +27,7 @@
                         <a class="nav-link" href="#">Логирование</a>
                     </li>
                 </ul>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger">Выход</a>
             </div>
         </div>
     </nav>

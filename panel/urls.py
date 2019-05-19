@@ -8,6 +8,7 @@ urlpatterns = [
     path('successful', views.successful_connect, name='successful_connect'),
 
     path('panel/auth', views.auth, name='auth'),
+    path('panel/logout', views.logout_view, name='logout'),
 
     # Dashboard
     path('panel/', dashboard.index, name='dashboard'),

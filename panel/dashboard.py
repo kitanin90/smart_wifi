@@ -1,4 +1,6 @@
 from datetime import timedelta
+
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from django.db.models import Sum, F
@@ -10,6 +12,7 @@ from panel.models import Client, NAS, Session
 
 
 @require_http_methods(["GET"])
+@login_required
 def index(request):
     now = timezone.now()
 
