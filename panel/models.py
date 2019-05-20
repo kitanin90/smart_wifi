@@ -48,6 +48,9 @@ class Client(models.Model):
             time=Sum("acctsessiontime") / 60
         )
 
+    def get_password(self):
+        return ClientParameter.objects.get(username=self.username, attribute="Cleartext-Password").value
+
 
 class ClientParameter(models.Model):
     username = models.CharField(max_length=64)
