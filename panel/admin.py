@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from panel.models import Building, Faculty, Client, ClientParameter, Session, NAS, ClientReply, AuthLog, Group, \
-    GroupParameter, GroupReply, UserGroup
+    GroupParameter, GroupReply, UserGroup, Flow
 
 admin.site.register(Building)
 admin.site.register(Faculty)
@@ -17,6 +17,7 @@ admin.site.register(GroupReply)
 admin.site.register(UserGroup)
 
 admin.site.register(Session)
+admin.site.register(Flow)
 
 admin.site.register(NAS)
 

@@ -32,3 +32,10 @@ services:
     depends_on:
       - db
       - web
+  flow-collector:
+    build: ./flow-collector
+    restart: always
+    ports:
+      - "555:555/udp"
+    env_file:
+      - .env

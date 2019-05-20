@@ -34,6 +34,7 @@ def get_traffic_from_date(date):
 
 
 def get_top10_clients_from_date(date):
+    # TODO: FIX None
     top_clients = Session.objects.filter(acctstarttime__gte=date).values('username').annotate(
         traffic=Sum((F("acctinputoctets") + F("acctoutputoctets")) / BYTES_IN_MB)
     ).order_by('-traffic')[:10]
@@ -45,6 +46,7 @@ def get_top10_clients_from_date(date):
 
 
 def get_top10_points_from_date(date):
+    # TODO: FIX None
     top_points = Session.objects.filter(acctstarttime__gte=date).values('calledstationid').annotate(
         traffic=Sum((F("acctinputoctets") + F("acctoutputoctets")) / BYTES_IN_MB)
     ).order_by('-traffic')[:10]

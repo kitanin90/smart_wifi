@@ -91,8 +91,7 @@ sql {
 	server = "db"
 	port = 3306
 	login = "root"
-	# password = "{MYSQL_ROOT_PASSWORD}"
-	password = "19823711"
+	password = "{MYSQL_ROOT_PASSWORD}"
 
 	# Database table configuration for everything except Oracle
 	# radius_db = "{MYSQL_DATABASE}"
