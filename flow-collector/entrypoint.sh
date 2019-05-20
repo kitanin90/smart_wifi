@@ -8,7 +8,7 @@ exit_script() {
 
 trap exit_script SIGINT SIGTERM
 
-flow-capture -p /flow-capture.pid -w /var/log/flow -n 245 0/172.20.0.1/555
+flow-capture -p /flow-capture.pid -w /var/log/flow -n 1440 0/172.20.0.1/555
 export PID=`cat /flow-capture.pid.555`
 
 while true; do
