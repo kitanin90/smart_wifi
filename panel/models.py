@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Sum
 
 from panel.const import BYTES_IN_MB
+from datetime import timedelta
 
 
 class Building(models.Model):
@@ -50,6 +51,9 @@ class Client(models.Model):
 
     def get_password(self):
         return ClientParameter.objects.get(username=self.username, attribute="Cleartext-Password").value
+
+    def get_last_10_sessions(self):
+        return Session.objects.filter(username=self.username).order_by("-acctstarttime")[:10]
 
 
 class ClientParameter(models.Model):
@@ -138,6 +142,23 @@ class Session(models.Model):
     framedprotocol = models.CharField(max_length=32, null=True)
     framedipaddress = models.CharField(max_length=15)
 
+    def get_start_time(self):
+        return self.acctstarttime + timedelta(hours=5)
+
+    def get_end_time(self):
+        if self.acctstoptime is None:
+            return ""
+
+        return self.acctstoptime + timedelta(hours=5)
+
+    def get_traffic(self):
+        return round((self.acctinputoctets + self.acctoutputoctets) / BYTES_IN_MB)
+
+    def get_router(self):
+        return NAS.objects.get(mac=self.calledstationid)
+
+    def get_status(self):
+        return "Работает" if self.acctterminatecause == "" else self.acctterminatecause
 
 class Flow(models.Model):
     unix_secs = models.IntegerField(default=0)

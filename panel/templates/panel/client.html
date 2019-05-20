@@ -20,43 +20,50 @@
                     <div class="card" style="width: auto;">
                         <h4><span class="badge badge-warning">Фамилия:</span></h4>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="lastname" value="{{ client.lastname }}" disabled>
+                            <input type="email" class="form-control" id="lastname" value="{{ client.lastname }}"
+                                   disabled>
                         </div>
                     </div>
                     <div class="card" style="width: auto;">
                         <h4><span class="badge badge-warning">Имя:</span></h4>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="firstname" value="{{ client.firstname }}" disabled>
+                            <input type="email" class="form-control" id="firstname" value="{{ client.firstname }}"
+                                   disabled>
                         </div>
                     </div>
                     <div class="card" style="width: auto;">
                         <h4><span class="badge badge-warning">Отчество:</span></h4>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="patronymic" value="{{ client.patronymic }}" disabled>
+                            <input type="email" class="form-control" id="patronymic" value="{{ client.patronymic }}"
+                                   disabled>
                         </div>
                     </div>
                     <div class="card" style="width: auto;">
                         <h4><span class="badge badge-warning">Факультет:</span></h4>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="faculty" value="{{ client.faculty.name }}" disabled>
+                            <input type="email" class="form-control" id="faculty" value="{{ client.faculty.name }}"
+                                   disabled>
                         </div>
                     </div>
                     <div class="card" style="width: auto;">
                         <h4><span class="badge badge-warning">Телефон:</span></h4>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="telephone" value="{{ client.telephone }}" disabled>
+                            <input type="email" class="form-control" id="telephone" value="{{ client.telephone }}"
+                                   disabled>
                         </div>
                     </div>
                     <div class="card" style="width: auto;">
                         <h4><span class="badge badge-warning">Username:</span></h4>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="username" value="{{ client.username }}" disabled>
+                            <input type="email" class="form-control" id="username" value="{{ client.username }}"
+                                   disabled>
                         </div>
                     </div>
                     <div class="card" style="width: auto;">
                         <h4><span class="badge badge-warning">Номер зачетной:</span></h4>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="username" value="{{ client.get_password }}" disabled>
+                            <input type="email" class="form-control" id="username" value="{{ client.get_password }}"
+                                   disabled>
                         </div>
                     </div>
                     <div class="card" style="width: auto;">
@@ -106,6 +113,30 @@
                                 <td>{{ week_time.time }} минут</td>
                                 <td>{{ month_time.time }} минут</td>
                             </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Последние 10 сеансов</h3>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Время начала</th>
+                                <th scope="col">Время конца</th>
+                                <th scope="col">Роутер</th>
+                                <th scope="col">Трафик</th>
+                                <th scope="col">Статус</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for session in client.get_last_10_sessions %}
+                                <tr>
+                                    <td>{{ session.get_start_time }}</td>
+                                    <td>{{ session.get_end_time }}</td>
+                                    <td>{{ session.get_router }}</td>
+                                    <td>{{ session.get_traffic }} МБ</td>
+                                    <td>{{ session.get_status }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
