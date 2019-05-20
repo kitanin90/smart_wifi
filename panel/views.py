@@ -117,3 +117,20 @@ def session(request, session_id):
     session = Session.objects.get(id=session_id)
 
     return render(request, 'panel/session.html', {"session": session})
+
+
+@require_http_methods(["GET"])
+@login_required
+def report(request):
+    sessions = None
+    start_time = None
+    end_time = None
+
+    if "start_time" in request.GET and "end_time" in request.GET:
+        start_time = request.GET["start_time"]
+        end_time = request.GET["end_time"]
+
+        sessions = Session.objects.filter(acctstarttime__gte=start_time, acctstarttime__lte=end_time).order_by(
+            "acctstarttime")
+
+    return render(request, 'panel/report.html', {"sessions": sessions, "start_time": start_time, "end_time": end_time})

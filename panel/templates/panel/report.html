@@ -1,0 +1,92 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}Отчёт{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'panel/css/client.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'layout/menu.html' %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="w-100 p-3" style="background-color: #eee;">
+                        <form action="{% url 'report' %}" method="get">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="input-group date" id="start_time" data-target-input="nearest">
+                                            <input type="text" name="start_time"
+                                                   class="form-control datetimepicker-input"
+                                                   data-target="#start_time"/>
+                                            <div class="input-group-append" data-target="#start_time"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <div class="input-group date" id="end_time" data-target-input="nearest">
+                                            <input type="text" name="end_time" class="form-control datetimepicker-input"
+                                                   data-target="#end_time"/>
+                                            <div class="input-group-append" data-target="#end_time"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <button type="submit" class="btn btn-primary">Поиск</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        {% if sessions is not None %}
+                            <h3>Сессии с {{ start_time }} по {{ end_time }}</h3>
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Клиент</th>
+                                    <th scope="col">Время начала</th>
+                                    <th scope="col">Время окончания</th>
+                                    <th scope="col">Роутер</th>
+                                    <th scope="col">Трафик</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for session in sessions %}
+                                    <tr>
+                                        <td><a href="{% url "session" session.id %}">{{ session.get_client.fullname }}</a></td>
+                                        <td>{{ session.get_start_time }}</td>
+                                        <td>{{ session.get_end_time }}</td>
+                                        <td>{{ session.get_router }}</td>
+                                        <td>{{ session.get_traffic }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#start_time, #end_time').datetimepicker({
+                locale: 'ru',
+                format: 'YYYY-MM-DD HH:MM'
+            });
+        });
+    </script>
+{% endblock %}

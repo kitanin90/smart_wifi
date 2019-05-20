@@ -23,4 +23,7 @@ urlpatterns = [
 
     # Session
     path('panel/session/<int:session_id>', views.session, name='session'),
+
+    # Report
+    path('panel/report', views.report, name='report'),
 ]
