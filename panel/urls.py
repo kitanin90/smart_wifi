@@ -20,4 +20,7 @@ urlpatterns = [
     # Users
     path('panel/clients', views.clients, name='clients'),
     path('panel/clients/<int:client_id>', views.client, name='client'),
+
+    # Session
+    path('panel/session/<int:session_id>', views.session, name='session'),
 ]

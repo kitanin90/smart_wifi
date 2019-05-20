@@ -130,7 +130,7 @@
                             <tbody>
                             {% for session in client.get_last_10_sessions %}
                                 <tr>
-                                    <td>{{ session.get_start_time }}</td>
+                                    <td><a href="{% url 'session' session.id %}">{{ session.get_start_time }}</a></td>
                                     <td>{{ session.get_end_time }}</td>
                                     <td>{{ session.get_router }}</td>
                                     <td>{{ session.get_traffic }} МБ</td>

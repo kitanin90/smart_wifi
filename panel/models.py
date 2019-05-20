@@ -3,6 +3,8 @@ from django.db.models import Sum
 
 from panel.const import BYTES_IN_MB
 from datetime import timedelta
+from django.utils import timezone
+from datetime import datetime
 
 
 class Building(models.Model):
@@ -160,6 +162,13 @@ class Session(models.Model):
     def get_status(self):
         return "Работает" if self.acctterminatecause == "" else self.acctterminatecause
 
+    def get_client(self):
+        return Client.objects.get(username=self.username)
+
+    def get_flows(self):
+        return Flow.objects.filter(srcaddr=self.framedipaddress).order_by("-unix_secs")
+
+
 class Flow(models.Model):
     unix_secs = models.IntegerField(default=0)
     unix_nsecs = models.IntegerField(default=0)
@@ -187,6 +196,9 @@ class Flow(models.Model):
 
     class Meta:
         unique_together = ('unix_secs', 'srcaddr', 'dstaddr', 'srcport', 'dstport')
+
+    def get_time(self):
+        return timezone.make_aware(datetime.fromtimestamp(self.unix_secs) + timedelta(hours=5), timezone.get_current_timezone())
 
 
 class AuthLog(models.Model):

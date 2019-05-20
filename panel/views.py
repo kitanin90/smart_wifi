@@ -6,7 +6,7 @@ from django.views.decorators.http import require_http_methods
 
 from datetime import timedelta
 from django.utils import timezone
-from panel.models import Faculty, Client, Building, NAS
+from panel.models import Faculty, Client, Building, NAS, Session
 
 
 @require_http_methods(["GET"])
@@ -109,3 +109,11 @@ def client(request, client_id):
     return render(request, 'panel/client.html',
                   {"client": client, "month_traffic": month_traffic, "week_traffic": week_traffic,
                    "day_traffic": day_traffic, "month_time": month_time, "week_time": week_time, "day_time": day_time})
+
+
+@require_http_methods(["GET"])
+@login_required
+def session(request, session_id):
+    session = Session.objects.get(id=session_id)
+
+    return render(request, 'panel/session.html', {"session": session})
