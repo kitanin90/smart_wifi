@@ -81,7 +81,9 @@
                             {% for flow in session.get_flows %}
                                 <tr>
                                     <td>{{ flow.get_time }}</td>
-                                    <td>{{ flow.dstaddr }}</td>
+                                    <td><a target="_blank"
+                                           href="https://www.nic.ru/whois/?searchWord={{ flow.dstaddr }}">{{ flow.dstaddr }}</a>
+                                    </td>
                                     <td>{{ flow.dstport }}</td>
                                 </tr>
                             {% endfor %}
