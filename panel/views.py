@@ -1,11 +1,12 @@
 from random import randint
 
+import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 
 from datetime import timedelta
@@ -13,15 +14,16 @@ from django.utils import timezone
 
 from panel.const import CLEARTEXT_PASSWORD
 from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter
+from smart_wifi.settings import SMSC_LOGIN, SMSC_PASSWORD
 
 
 @require_http_methods(["GET"])
+@ensure_csrf_cookie
 def connect(request):
     return render(request, 'captive/index.html')
 
 
 @require_http_methods(["POST"])
-@csrf_protect
 def send_code(request):
     telephone = request.POST["telephone"]
 
@@ -42,9 +44,16 @@ def send_code(request):
     client_parameter.username = telephone
     client_parameter.op = ":="
     client_parameter.attribute = CLEARTEXT_PASSWORD
-    client_parameter.value = ''.join(["%s" % randint(0, 9) for num in range(0, 6)])
+
+    code = ''.join(["%s" % randint(0, 9) for num in range(0, 6)])
+
+    client_parameter.value = code
 
     client_parameter.save()
+
+    r = requests.post("https://smsc.ru/sys/send.php",
+                      data={'login': SMSC_LOGIN, 'psw': SMSC_PASSWORD, 'phones': "+7" + telephone,
+                            "mes": "WiFi code: " + code})
 
     return HttpResponse("ok")
 
