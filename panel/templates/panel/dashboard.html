@@ -59,8 +59,8 @@
                             {% for client in top_clients %}
                                 <tr>
                                     <td><a href="{% url 'client' client.obj.id %}">{{ client.obj.fullname }}</a></td>
-                                    <td>{{ client.obj.faculty }}</td>
-                                    <td>{{ client.traffic }}</td>
+                                    <td>{{ client.obj.faculty|default_if_none:"" }}</td>
+                                    <td>{{ client.traffic|default_if_none:0 }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -82,7 +82,7 @@
                                 <tr>
                                     <td><a href="{% url "point" point.obj.id %}">{{ point.obj.name }}</a></td>
                                     <td>{{ point.obj.building }}</td>
-                                    <td>{{ point.traffic }}</td>
+                                    <td>{{ point.traffic|default_if_none:0 }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

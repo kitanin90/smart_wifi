@@ -280,3 +280,6 @@ class NAS(models.Model):
             download=Sum("acctinputoctets") / BYTES_IN_MB,
             upload=Sum("acctoutputoctets") / BYTES_IN_MB
         )
+
+    def get_last_10_sessions(self):
+        return Session.objects.filter(calledstationid=self.mac).order_by("-acctstarttime")[:10]

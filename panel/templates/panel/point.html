@@ -71,10 +71,34 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{{ day_traffic.download }} МБ / {{ day_traffic.upload }} МБ</td>
-                            <td>{{ week_traffic.download }} МБ / {{ week_traffic.upload }} МБ</td>
-                            <td>{{ month_traffic.download }} МБ / {{ month_traffic.upload }} МБ</td>
+                            <td>{{ day_traffic.download|default_if_none:0 }} МБ / {{ day_traffic.upload|default_if_none:0 }} МБ</td>
+                            <td>{{ week_traffic.download|default_if_none:0 }} МБ / {{ week_traffic.upload|default_if_none:0 }} МБ</td>
+                            <td>{{ month_traffic.download|default_if_none:0 }} МБ / {{ month_traffic.upload|default_if_none:0 }} МБ</td>
                         </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Последние 10 сеансов</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Время начала</th>
+                            <th scope="col">Время конца</th>
+                            <th scope="col">Клиент</th>
+                            <th scope="col">Трафик</th>
+                            <th scope="col">Статус</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for session in nas.get_last_10_sessions %}
+                            <tr>
+                                <td><a href="{% url 'session' session.id %}">{{ session.get_start_time }}</a></td>
+                                <td>{{ session.get_end_time }}</td>
+                                <td><a href="{% url 'client'  session.get_client.id %}">{{ session.get_client }}</a></td>
+                                <td>{{ session.get_traffic|default_if_none:0 }} МБ</td>
+                                <td>{{ session.get_status }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
