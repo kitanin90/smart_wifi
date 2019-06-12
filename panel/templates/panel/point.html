@@ -16,41 +16,31 @@
         <div class="col-md-2" style="padding-left: 15px">
             <div class="left-panel">
 
-                <h3>Данные точки доступа:</h3>
-                <div class="card" style="width: auto;">
-                    <h4><span class="badge badge-warning">Название:</span></h4>
+                <div class="card bg-light">
+                    <div class="card-header">Данные точки доступа:</div>
                     <div class="card-body">
-                        <input type="text" class="form-control" id="name" value="{{ nas.name }}" disabled>
-                    </div>
-                </div>
-                <div class="card" style="width: auto;">
-                    <h4><span class="badge badge-warning">IP:</span></h4>
-                    <div class="card-body">
-                        <input type="text" class="form-control" id="ip" value="{{ nas.ip }}" disabled>
-                    </div>
-                </div>
-                <div class="card" style="width: auto;">
-                    <h4><span class="badge badge-warning">Тип:</span></h4>
-                    <div class="card-body">
-                        <input type="text" class="form-control" id="type" value="{{ nas.type }}" disabled>
-                    </div>
-                </div>
-                <div class="card" style="width: auto;">
-                    <h4><span class="badge badge-warning">Secret:</span></h4>
-                    <div class="card-body">
-                        <input type="text" class="form-control" id="secret" value="{{ nas.secret }}" disabled>
-                    </div>
-                </div>
-                <div class="card" style="width: auto;">
-                    <h4><span class="badge badge-warning">MAC:</span></h4>
-                    <div class="card-body">
-                        <input type="text" class="form-control" id="mac" value="{{ nas.mac }}" disabled>
-                    </div>
-                </div>
-                <div class="card" style="width: auto;">
-                    <h4><span class="badge badge-warning">Корпус</span></h4>
-                    <div class="card-body">
-                        <input type="text" class="form-control" id="building" value="{{ nas.building }}" disabled>
+                        <h6 class="card-title">Название:</h6>
+                        <p class="card-text">{{ nas.name }}</p>
+                        <hr>
+
+                        <h6 class="card-title">IP:</h6>
+                        <p class="card-text">{{ nas.ip }}</p>
+                        <hr>
+
+                        <h6 class="card-title">Тип:</h6>
+                        <p class="card-text">{{ nas.type }}</p>
+                        <hr>
+
+                        <h6 class="card-title">Secret:</h6>
+                        <p class="card-text">{{ nas.secret }}</p>
+                        <hr>
+
+                        <h6 class="card-title">MAC:</h6>
+                        <p class="card-text">{{ nas.mac }}</p>
+                        <hr>
+
+                        <h6 class="card-title">Корпус:</h6>
+                        <p class="card-text">{{ nas.building }}</p>
                     </div>
                 </div>
 

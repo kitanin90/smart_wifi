@@ -16,63 +16,42 @@
             <div class="col-md-2" style="padding-left: 15px">
                 <div class="left-panel">
 
-                    <h3>Данные пользователя:</h3>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Фамилия:</span></h4>
+                    <div class="card bg-light">
+                        <div class="card-header">Данные пользователя:</div>
                         <div class="card-body">
-                            <input type="email" class="form-control" id="lastname" value="{{ client.lastname }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Имя:</span></h4>
-                        <div class="card-body">
-                            <input type="email" class="form-control" id="firstname" value="{{ client.firstname }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Отчество:</span></h4>
-                        <div class="card-body">
-                            <input type="email" class="form-control" id="patronymic" value="{{ client.patronymic }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Факультет:</span></h4>
-                        <div class="card-body">
-                            <input type="email" class="form-control" id="faculty" value="{{ client.faculty.name }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Телефон:</span></h4>
-                        <div class="card-body">
-                            <input type="email" class="form-control" id="telephone" value="{{ client.telephone }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Username:</span></h4>
-                        <div class="card-body">
-                            <input type="email" class="form-control" id="username" value="{{ client.username }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Номер зачетной:</span></h4>
-                        <div class="card-body">
-                            <input type="email" class="form-control" id="username" value="{{ client.get_password }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Статус:</span></h4>
-                        <div class="card-body">
-                            <input type="email" class="form-control" id="status" value="{{ client.status }}" disabled>
-                        </div>
-                    </div>
+                            <h6 class="card-title">Username:</h6>
+                            <p class="card-text">{{ client.username }}</p>
+                            <hr>
 
+                            <h6 class="card-title">Фамилия:</h6>
+                            <p class="card-text">{{ client.lastname }}</p>
+                            <hr>
+
+                            <h6 class="card-title">Имя:</h6>
+                            <p class="card-text">{{ client.firstname }}</p>
+                            <hr>
+
+                            <h6 class="card-title">Отчество:</h6>
+                            <p class="card-text">{{ client.patronymic }}</p>
+                            <hr>
+
+                            <h6 class="card-title">Факультет:</h6>
+                            <p class="card-text">{{ client.faculty.name }}</p>
+                            <hr>
+
+                            <h6 class="card-title">Телефон:</h6>
+                            <p class="card-text">{{ client.telephone }}</p>
+                            <hr>
+
+                            {% if not client.sms_auth %}
+                                <h6 class="card-title">Номер зачётной:</h6>
+                                <p class="card-text">{{ client.get_password }}</p>
+                            {% endif %}
+
+                            <h6 class="card-title">Статус:</h6>
+                            <p class="card-text">{{ client.status }}</p>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -138,7 +117,8 @@
                                 <tr>
                                     <td><a href="{% url 'session' session.id %}">{{ session.get_start_time }}</a></td>
                                     <td>{{ session.get_end_time }}</td>
-                                    <td><a href="{% url "point" session.get_router.id %}">{{ session.get_router }}</a></td>
+                                    <td><a href="{% url "point" session.get_router.id %}">{{ session.get_router }}</a>
+                                    </td>
                                     <td>{{ session.get_traffic|default_if_none:0 }} МБ</td>
                                     <td>{{ session.get_status }}</td>
                                 </tr>
