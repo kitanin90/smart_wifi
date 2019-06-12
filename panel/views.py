@@ -1,17 +1,52 @@
+from random import randint
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from datetime import timedelta
 from django.utils import timezone
-from panel.models import Faculty, Client, Building, NAS, Session
+
+from panel.const import CLEARTEXT_PASSWORD
+from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter
 
 
 @require_http_methods(["GET"])
 def connect(request):
     return render(request, 'captive/index.html')
+
+
+@require_http_methods(["POST"])
+@csrf_protect
+def send_code(request):
+    telephone = request.POST["telephone"]
+
+    if not Client.objects.filter(username=telephone).exists():
+        client = Client()
+
+        client.sms_auth = True
+        client.username = telephone
+        client.telephone = telephone
+
+        client.save()
+
+    try:
+        client_parameter = ClientParameter.objects.filter(username=telephone, attribute=CLEARTEXT_PASSWORD).get()
+    except ObjectDoesNotExist:
+        client_parameter = ClientParameter()
+
+    client_parameter.username = telephone
+    client_parameter.op = ":="
+    client_parameter.attribute = CLEARTEXT_PASSWORD
+    client_parameter.value = ''.join(["%s" % randint(0, 9) for num in range(0, 6)])
+
+    client_parameter.save()
+
+    return HttpResponse("ok")
 
 
 @require_http_methods(["GET"])

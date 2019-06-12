@@ -32,18 +32,20 @@ class Faculty(models.Model):
 
 
 class Client(models.Model):
-    lastname = models.CharField(max_length=255, verbose_name="Фамилия")
-    firstname = models.CharField(max_length=255, verbose_name="Имя")
-    patronymic = models.CharField(max_length=255, verbose_name="Отчество")
+    lastname = models.CharField(max_length=255, blank=True, verbose_name="Фамилия")
+    firstname = models.CharField(max_length=255, blank=True, verbose_name="Имя")
+    patronymic = models.CharField(max_length=255, blank=True, verbose_name="Отчество")
     username = models.CharField(max_length=64, unique=True)
-    status = models.CharField(max_length=255, verbose_name="Статус")
+    status = models.CharField(max_length=255, blank=True, verbose_name="Статус")
+
+    sms_auth = models.BooleanField(default=False, verbose_name="СМС авторизация")
 
     telephone = models.CharField(max_length=255, verbose_name="Телефон")
 
-    faculty = models.ForeignKey("Faculty", on_delete=models.DO_NOTHING, verbose_name="Факультет")
+    faculty = models.ForeignKey("Faculty", blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name="Факультет")
 
     def fullname(self):
-        return "{} {} {}".format(self.lastname, self.firstname, self.patronymic)
+        return "{} {} {}".format(self.lastname, self.firstname, self.patronymic) if not self.sms_auth else self.username
 
     def __str__(self):
         return self.fullname()
@@ -238,7 +240,8 @@ class Flow(models.Model):
         unique_together = ('unix_secs', 'srcaddr', 'dstaddr', 'srcport', 'dstport')
 
     def get_time(self):
-        return timezone.make_aware(datetime.fromtimestamp(self.unix_secs) + timedelta(hours=5), timezone.get_current_timezone())
+        return timezone.make_aware(datetime.fromtimestamp(self.unix_secs) + timedelta(hours=5),
+                                   timezone.get_current_timezone())
 
 
 class AuthLog(models.Model):

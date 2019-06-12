@@ -29,14 +29,48 @@
         chilliController.host = "192.168.182.1";
         chilliController.onUpdate = onUpdate;
 
-        function onClick() {
+
+        function onClientAuth() {
             var name = document.getElementById("name").value;
             var password = document.getElementById("password").value;
 
-            console.log(name);
-            console.log(password);
-
             chilliController.logon(rus_to_latin(name), password);
+        }
+
+        var isCodeSent = false;
+
+        function onSMSAuth() {
+            var tel = document.getElementById("telephone").value;
+
+            if (!isCodeSent) {
+                if (tel.length < 10) {
+                    return;
+                }
+
+                var data = new FormData();
+                data.append('telephone', tel);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'code', true);
+                xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                xhr.onload = function () {
+                    document.getElementById("tel-group").style.display = 'none';
+                    document.getElementById("code-group").style.display = 'flex';
+
+                    document.getElementById("code-submit").innerText = 'Подключиться';
+
+                    isCodeSent = true;
+                };
+                xhr.send(data);
+            } else {
+                if (tel.length < 6) {
+                    return;
+                }
+
+                var code = document.getElementById("code").value;
+
+                chilliController.logon(tel, code);
+            }
         }
 
         function rus_to_latin(str) {
@@ -63,6 +97,22 @@
 
             return n_str.join('');
         }
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
     </script>
 </head>
 
@@ -71,30 +121,58 @@
     <div class="login-block">
         <img src="{% static 'captive/img/new21.png' %}" alt="Scanfcode" class="img-responsive center-block"
              style="width: 100%;">
-        <h1>Введите свои данные</h1>
-        <div class="form-group">
-            <div class="input-group">
-                <!--
-                                <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                                 -->
-                <span><img src="{% static 'captive/img/user.png' %}" height="20px" width="20px"></span>
-                <input type="text" class="form-control" placeholder="ФИО" id="name">
+
+        <ul class="nav nav-pills nav-fill" style="margin-top: 20px" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-student-tab" data-toggle="pill" href="#pills-student" role="tab"
+                   aria-controls="pills-student" aria-selected="true">Для студентов</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-sms-tab" data-toggle="pill" href="#pills-sms" role="tab"
+                   aria-controls="pills-sms" aria-selected="false">По СМС</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-student" role="tabpanel"
+                 aria-labelledby="pills-student-tab">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span><img src="{% static 'captive/img/user.png' %}" height="30px" width="30px"></span>
+                        <input type="text" class="form-control" placeholder="ФИО" id="name">
+                    </div>
+                </div>
+
+                <hr class="hr-xs">
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span><img src="{% static 'captive/img/password.png' %}" height="30px" width="30px"></span>
+                        <input id="password" type="password" class="form-control" placeholder="Номер зачетной книжки">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg" onclick="onClientAuth();">Подключиться</button>
+            </div>
+            <div class="tab-pane fade" id="pills-sms" role="tabpanel" aria-labelledby="pills-sms-tab">
+                <div class="form-group">
+                    <div id="tel-group" class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">+7</span>
+                        </div>
+                        <input type="tel" class="form-control" placeholder="9999999999" maxlength="10" id="telephone">
+                    </div>
+
+                    <div id="code-group" class="input-group" style="display: none">
+                        <span><img src="{% static 'captive/img/password.png' %}" height="30px" width="30px"></span>
+                        <input type="text" class="form-control" placeholder="Код" maxlength="6" id="code">
+                    </div>
+                </div>
+
+                <button id="code-submit" class="btn btn-primary btn-lg" onclick="onSMSAuth();">Отправить код</button>
             </div>
         </div>
 
-        <hr class="hr-xs">
-
-        <div class="form-group">
-            <div class="input-group">
-                <span><img src="{% static 'captive/img/password.png' %}" height="20px" width="20px"></span>
-                <input id="password" type="password" class="form-control" placeholder="Номер зачетной книжки">
-            </div>
-        </div>
-
-        <button class="btn btn-primary btn-lg" onclick="onClick();">Подключиться</button>
-
-        <div class="login-footer">
-        </div>
     </div>
 </main>
 </body>
