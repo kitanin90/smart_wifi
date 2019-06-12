@@ -78,7 +78,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% for flow in session.get_flows %}
+                            {% for flow in flows %}
                                 <tr>
                                     <td>{{ flow.get_time }}</td>
                                     <td><a target="_blank"
@@ -89,6 +89,34 @@
                             {% endfor %}
                             </tbody>
                         </table>
+
+                        <nav aria-label="Flow navigation">
+                            <ul class="pagination">
+                                {% if flows.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ flows.previous_page_number }}"
+                                           aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Предыдущая страница</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% for flow_page in flows.paginator.page_range %}
+                                    <li class="page-item {% if flow_page == flows.number %} active {% endif %}"><a class="page-link" href="?page={{ flow_page }}">{{ flow_page }}</a></li>
+                                {% endfor %}
+
+                                {% if flows.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ flows.next_page_number }}"
+                                           aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Следующая страница</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

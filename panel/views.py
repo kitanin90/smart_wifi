@@ -4,6 +4,7 @@ import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
@@ -160,7 +161,13 @@ def client(request, client_id):
 def session(request, session_id):
     session = Session.objects.get(id=session_id)
 
-    return render(request, 'panel/session.html', {"session": session})
+    flow_list = session.get_flows()
+    paginator = Paginator(flow_list, 50)
+
+    page = request.GET.get('page')
+    flows = paginator.get_page(page)
+
+    return render(request, 'panel/session.html', {"session": session, "flows": flows})
 
 
 @require_http_methods(["GET"])
