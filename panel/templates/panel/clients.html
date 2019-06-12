@@ -12,52 +12,80 @@
 
 <div class="container-fluid">
     <div class="row">
-
-        <div class="col-md-2" style="padding-left: 15px">
+        <div class="col-md-2" style="">
             <div class="left-panel">
-                <h2>Факультеты:</h2>
-                <div class="content">
-                    {% for faculty in faculty_list %}
-                    <p><a href="{% url "clients" %}?faculty_id={{ faculty.id }}">{{ faculty.name }}</a></p>
-                    <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                    {% empty %}
-                    <p>Нет факультетов</p>
-                    {% endfor %}
+<!--                <h2>Факультеты:</h2>-->
+<!--                <div class="content">-->
+<!--                    {% for faculty in faculty_list %}-->
+<!--                    <p><a href="{% url "clients" %}?faculty_id={{ faculty.id }}">{{ faculty.name }}</a></p>-->
+<!--                    <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">-->
+<!--                    {% empty %}-->
+<!--                    <p>Нет факультетов</p>-->
+<!--                    {% endfor %}-->
+<!--                </div>-->
+
+                <div class="card bg-light">
+                    <div class="card-header">Факультеты:</div>
+                        <div class="card-body">
+                            {% for faculty in faculty_list %}
+                            <p><a href="{% url "clients" %}?faculty_id={{ faculty.id }}">{{ faculty.name }}</a></p>
+                            <p class="card-text">{{ client.username }}</p>
+                            <hr>
+                            {% empty %}
+                              <p>Нет факультетов</p>-->
+                            {% endfor %}
+                        </div>
                 </div>
-            </div>
+             </div>
         </div>
+<!--        <div class="col-md-2" style="padding-left: 15px">-->
+<!--            <div class="left-panel">-->
+
+<!--                <div class="card bg-light">-->
+<!--                    <div class="card-header">Факультеты:</div>-->
+<!--                    {% for faculty in faculty_list %}-->
+<!--                        <div class="card-body">-->
+<!--                            <p class="card-text"><a href="{% url "clients" %}?faculty_id={{ faculty.id }}">{{ faculty.name }}</a></p>-->
+<!--                            <hr>-->
+<!--                            {% empty %}-->
+<!--                            <p>Нет факультетов</p>-->
+<!--                            {% endfor %}-->
+<!--                         </div>-->
+<!--                 </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="col-md-10">
             <div class="panel">
                 <div class="w-100 p-3" style="background-color: #eee;">
-                    {% if client_list is not None %}
-                    <h3>Список пользователей {{ faculty }}:</h3>
-                    <table class="table">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Фамилия</th>
-                            <th scope="col">Имя</th>
-                            <th scope="col">Отчество</th>
-                            <th scope="col">Номер зачётной книжки</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for client in client_list %}
+                        {% if client_list is not None %}
+                        <h3>Список пользователей {{ faculty }}:</h3>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Фамилия</th>
+                                <th scope="col">Имя</th>
+                                <th scope="col">Отчество</th>
+                                <th scope="col">Номер зачётной книжки</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for client in client_list %}
 
-                        <tr>
-                            <th scope="row"><a href="{% url "client" client.id %}">{{ client.id }}</a></th>
-                            <td>{{ client.lastname }}</td>
-                            <td>{{ client.firstname }}</td>
-                            <td>{{ client.patronymic }}</td>
-                            <td>{{ client.get_password }}</td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                    <h3>Выберите факультет</h3>
-                    {% endif %}
+                            <tr>
+                                <th scope="row"><a href="{% url "client" client.id %}">{{ client.id }}</a></th>
+                                <td>{{ client.lastname }}</td>
+                                <td>{{ client.firstname }}</td>
+                                <td>{{ client.patronymic }}</td>
+                                <td>{{ client.get_password }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <h3>Выберите факультет</h3>
+                        {% endif %}
                 </div>
             </div>
         </div>
