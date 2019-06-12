@@ -38,8 +38,9 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 
 .left-panel {
     text-align: center;
-    padding-left:10px;
+    padding-left: 10px;
 }
+
 .panel {
     background-color: #DCDCDC;
     height: 278px;
@@ -64,6 +65,21 @@ h3 {
     padding-right: 0;
 }
 
-.w-100 h3{
-    color:blue;
+.w-100 h3 {
+    color: blue;
+}
+
+h6 {
+    color: maroon;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */
+    font-size: 170%; /* Размер шрифта в процентах */
+}
+
+.card-header {
+    /*color: blue;*/
+    font-size: 150%; /* Размер шрифта в процентах */
+    color: black;
+    font-weight: 600;
+    background-color: #FFD700;
 }

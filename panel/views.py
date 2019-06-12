@@ -56,7 +56,7 @@ def send_code(request):
                       data={'login': SMSC_LOGIN, 'psw': SMSC_PASSWORD, 'phones': "+7" + telephone,
                             "mes": "WiFi code: " + code})
 
-    return HttpResponse("ok")
+    return HttpResponse(SMSC_LOGIN)
 
 
 @require_http_methods(["GET"])

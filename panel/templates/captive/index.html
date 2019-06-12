@@ -114,9 +114,11 @@
     </script>
 </head>
 
-<body class="login-page" style="background: url({% static 'captive/img/frost.jpg' %});">
+<body class="login-page" style="background: url({% static 'captive/img/frost2.jpg' %}) ;">
+
+
 <main>
-    <div class="login-block">
+    <div class="login-block" id="login_block">
         <img src="{% static 'captive/img/new21.png' %}" alt="Scanfcode" class="img-responsive center-block"
              style="width: 100%;">
 
@@ -146,7 +148,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span><img src="{% static 'captive/img/password.png' %}" height="30px" width="30px"></span>
-                        <input id="password" type="password" class="form-control" placeholder="Номер зачетной книжки">
+                        <input id="password" type="password" class="form-control" placeholder="Пароль">
                     </div>
                 </div>
 
