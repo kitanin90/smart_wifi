@@ -56,17 +56,20 @@ h3 {
     font-family: "Lucida Console", serif;
     text-align: center;
     padding-top: 1px;
-    color: white;
-
+    /*color: white;*/
+    background-color: #FFD700;
+    color: black;
 }
+
 
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
 }
 
-.w-100 h3 {
-    color: blue;
+.w-100 {
+    font-weight: 600;
+    border-radius: 8px;
 }
 
 h6 {
@@ -82,4 +85,8 @@ h6 {
     color: black;
     font-weight: 600;
     background-color: #FFD700;
+}
+
+.card-text{
+    font-weight: 600;
 }
