@@ -8,37 +8,49 @@ from datetime import datetime
 
 
 class Building(models.Model):
-    name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name="Название")
+    address = models.CharField(max_length=255, verbose_name="Адрес")
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Корпус'
+        verbose_name_plural = 'Корпусы'
 
 
 class Faculty(models.Model):
-    name = models.CharField(max_length=255)
-    building = models.ForeignKey("Building", on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=255, verbose_name="Название")
+    building = models.ForeignKey("Building", on_delete=models.DO_NOTHING, verbose_name="Корпус")
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Факультет'
+        verbose_name_plural = 'Факультеты'
+
 
 class Client(models.Model):
-    lastname = models.CharField(max_length=255)
-    firstname = models.CharField(max_length=255)
-    patronymic = models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255, verbose_name="Фамилия")
+    firstname = models.CharField(max_length=255, verbose_name="Имя")
+    patronymic = models.CharField(max_length=255, verbose_name="Отчество")
     username = models.CharField(max_length=64, unique=True)
-    status = models.CharField(max_length=255)
+    status = models.CharField(max_length=255, verbose_name="Статус")
 
-    telephone = models.CharField(max_length=255)
+    telephone = models.CharField(max_length=255, verbose_name="Телефон")
 
-    faculty = models.ForeignKey("Faculty", on_delete=models.DO_NOTHING)
+    faculty = models.ForeignKey("Faculty", on_delete=models.DO_NOTHING, verbose_name="Факультет")
 
     def fullname(self):
         return "{} {} {}".format(self.lastname, self.firstname, self.patronymic)
 
     def __str__(self):
         return self.fullname()
+
+    class Meta:
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'
 
     def get_traffic_from_date(self, date):
         return Session.objects.filter(acctstarttime__gte=date, username=self.username).aggregate(
@@ -67,6 +79,10 @@ class ClientParameter(models.Model):
     def __str__(self):
         return "{} {}".format(self.username, self.attribute)
 
+    class Meta:
+        verbose_name = 'Параметры клиента'
+        verbose_name_plural = 'Параметры клиентов'
+
 
 class ClientReply(models.Model):
     username = models.CharField(max_length=64)
@@ -77,15 +93,27 @@ class ClientReply(models.Model):
     def __str__(self):
         return "{} {}".format(self.username, self.attribute)
 
+    class Meta:
+        verbose_name = 'Настройки клиента'
+        verbose_name_plural = 'Настройки клиентов'
+
 
 class Group(models.Model):
     name = models.CharField(max_length=64, unique=True)
+
+    class Meta:
+        verbose_name = 'Группа'
+        verbose_name_plural = 'Группы'
 
 
 class UserGroup(models.Model):
     username = models.CharField(max_length=64)
     groupname = models.CharField(max_length=64)
     priority = models.IntegerField(default=1)
+
+    class Meta:
+        verbose_name = 'Группа клиента'
+        verbose_name_plural = 'Группы клиентов'
 
 
 class GroupParameter(models.Model):
@@ -97,6 +125,10 @@ class GroupParameter(models.Model):
     def __str__(self):
         return "{} {}".format(self.groupname, self.attribute)
 
+    class Meta:
+        verbose_name = 'Параметры группы'
+        verbose_name_plural = 'Параметры групп'
+
 
 class GroupReply(models.Model):
     groupname = models.CharField(max_length=64)
@@ -106,6 +138,10 @@ class GroupReply(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.groupname, self.attribute)
+
+    class Meta:
+        verbose_name = 'Настройки группы'
+        verbose_name_plural = 'Настройки групп'
 
 
 class Session(models.Model):
@@ -143,6 +179,10 @@ class Session(models.Model):
     servicetype = models.CharField(max_length=32, null=True)
     framedprotocol = models.CharField(max_length=32, null=True)
     framedipaddress = models.CharField(max_length=15)
+
+    class Meta:
+        verbose_name = 'Сессия'
+        verbose_name_plural = 'Сессии'
 
     def get_start_time(self):
         return self.acctstarttime + timedelta(hours=5)
@@ -210,20 +250,28 @@ class AuthLog(models.Model):
     def __str__(self):
         return "{} {}".format(self.username, self.reply)
 
+    class Meta:
+        verbose_name = 'Лог авторизации'
+        verbose_name_plural = 'Логи авторизации'
+
 
 class NAS(models.Model):
-    name = models.CharField(max_length=32)
-    ip = models.CharField(max_length=15)
-    type = models.CharField(max_length=30, blank=True, null=True)
-    ports = models.IntegerField(null=True)
-    secret = models.CharField(max_length=60)
-    server = models.CharField(max_length=64, blank=True, null=True)
-    mac = models.CharField(max_length=50)
+    name = models.CharField(max_length=32, verbose_name="Название")
+    ip = models.CharField(max_length=15, verbose_name="IP")
+    type = models.CharField(max_length=30, blank=True, null=True, verbose_name="Тип")
+    ports = models.IntegerField(null=True, verbose_name="Порт")
+    secret = models.CharField(max_length=60, verbose_name="Токен")
+    server = models.CharField(max_length=64, blank=True, null=True, verbose_name="Сервер")
+    mac = models.CharField(max_length=50, verbose_name="MAC")
 
-    building = models.ForeignKey("Building", on_delete=models.DO_NOTHING)
+    building = models.ForeignKey("Building", on_delete=models.DO_NOTHING, verbose_name="Корпус")
 
     def __str__(self):
         return "{} ({})".format(self.name, self.building.name)
+
+    class Meta:
+        verbose_name = 'Роутер'
+        verbose_name_plural = 'Роутеры'
 
     def get_traffic_from_date(self, date):
         return Session.objects.filter(acctstarttime__gte=date, calledstationid=self.mac).aggregate(
