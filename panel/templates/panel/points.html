@@ -12,25 +12,29 @@
 
 <div class="container-fluid">
     <div class="row">
-
-        <div class="col-md-2" style="padding-left: 15px">
+        <div class="col-md-2" style="">
             <div class="left-panel">
-                <h2>Корпус:</h2>
-                <div class="content">
-                    {% for building in building_list %}
-                    <p><a href="{% url "points" %}?building_id={{ building.id }}">{{ building.name }}</a></p>
-                    <hr style="background-color: #5a80a8; height: 1px; border: medium none; width:90%">
-                    {% empty %}
-                    <p>Нет корпусов</p>
-                    {% endfor %}
+
+                <div class="card bg-light">
+                    <div class="card-header">Корпус:</div>
+                        <div class="card-body">
+                            {% for building in building_list %}
+                            <p><a href="{% url "points" %}?building_id={{ building.id }}">{{ building.name }}</a></p>
+                            <p class="card-text">{{ client.username }}</p>
+                            <hr>
+                            {% empty %}
+                              <p>Нет корпусов</p>-->
+                            {% endfor %}
+                        </div>
                 </div>
-            </div>
+             </div>
         </div>
+
 
         <div class="col-md-10">
             <div class="w-100 p-3" style="background-color: #eee;">
                 {% if nas_list is not None %}
-                <h3>Список роутеров</h3>
+                <h3>Список роутеров:</h3>
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>

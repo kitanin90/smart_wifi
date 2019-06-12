@@ -39,7 +39,7 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 .left-panel {
     background-color: #DCDCDC;
     text-align: center;
-    padding: 10px;
+    border-radius: 10px;
 }
 
 .panel {
@@ -69,4 +69,32 @@ h2 {
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
+}
+
+p {
+    font-size: 140%; /* Размер шрифта в процентах */
+    color: black;
+    font-weight: 600;
+}
+
+.row {
+    padding-left: 12px;
+}
+
+.w-100 {
+    color:blue;
+    background-color: #eee;
+    font-weight: 600;
+    border-radius: 10px;
+}
+.panel{
+    border-radius: 8px;
+}
+
+.card-header {
+    /*color: blue;*/
+    font-size: 140%; /* Размер шрифта в процентах */
+    color: black;
+    font-weight: 600;
+    background-color: #FFD700;
 }
