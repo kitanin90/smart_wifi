@@ -19,8 +19,10 @@ while true; do
     fi
 
     flow-cat /var/log/flow/ | \
-    flow-export -f3 -mUNIX_SECS,UNIX_NSECS,SYSUPTIME,EXADDR,DFLOWS,DPKTS,DOCTETS,FIRST,LAST,ENGINE_TYPE,ENGINE_ID,SRCADDR,DSTADDR,NEXTHOP,INPUT,OUTPUT,SRCPORT,DSTPORT,PROT,TOS,TCP_FLAGS,SRC_MASK,DST_MASK \
+    flow-export -f3 -mUNIX_SECS,EXADDR,SRCADDR,DSTADDR,SRCPORT,DSTPORT,PROT \
     -u "root:$MYSQL_ROOT_PASSWORD:db:3306:$MYSQL_DATABASE:panel_flow"
 
-    sleep 30
+    rm -r /var/log/flow/*
+
+    sleep 180
 done

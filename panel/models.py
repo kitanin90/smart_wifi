@@ -219,28 +219,14 @@ class Session(models.Model):
 
 class Flow(models.Model):
     unix_secs = models.IntegerField(default=0)
-    unix_nsecs = models.IntegerField(default=0)
-    sysuptime = models.IntegerField(default=0)
     exaddr = models.CharField(max_length=45, default="0")
-    dflows = models.IntegerField(default=0, null=True)
-    dpkts = models.IntegerField(default=0)
-    doctets = models.IntegerField(default=0)
-    first = models.IntegerField(default=0)
-    last = models.IntegerField(default=0)
-    engine_type = models.IntegerField(default=0)
-    engine_id = models.IntegerField(default=0)
+
     srcaddr = models.CharField(max_length=45, default="0")
     dstaddr = models.CharField(max_length=45, default="0")
-    nexthop = models.CharField(max_length=45, default="0")
-    input = models.IntegerField(default=0)
-    output = models.IntegerField(default=0)
+
     srcport = models.IntegerField(default=0)
     dstport = models.IntegerField(default=0)
     prot = models.IntegerField(default=0)
-    tos = models.IntegerField(default=0)
-    tcp_flags = models.IntegerField(default=0)
-    src_mask = models.IntegerField(default=0)
-    dst_mask = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('unix_secs', 'srcaddr', 'dstaddr', 'srcport', 'dstport')
