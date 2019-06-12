@@ -249,6 +249,14 @@ class Flow(models.Model):
         return timezone.make_aware(datetime.fromtimestamp(self.unix_secs),
                                    timezone.get_current_timezone())
 
+    def get_protocol(self):
+        if self.prot == 6:
+            return "TCP"
+        elif self.prot == 17:
+            return "UDP"
+        else:
+            return "Unknown"
+
 
 class AuthLog(models.Model):
     username = models.CharField(max_length=64)

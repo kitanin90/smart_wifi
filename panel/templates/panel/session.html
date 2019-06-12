@@ -16,51 +16,47 @@
             <div class="col-md-2" style="padding-left: 15px">
                 <div class="left-panel">
 
-                    <h3>Данные сессии:</h3>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">ФИО:</span></h4>
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Данные сессии:</div>
                         <div class="card-body">
-                            <input type="text" class="form-control" id="fullname"
-                                   value="{{ session.get_client.fullname }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Время начала:</span></h4>
-                        <div class="card-body">
-                            <input type="text" class="form-control" id="faculty" value="{{ session.get_start_time }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Время конца:</span></h4>
-                        <div class="card-body">
-                            <input type="text" class="form-control" id="telephone" value="{{ session.get_end_time }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Роутер:</span></h4>
-                        <div class="card-body">
-                            <input type="text" class="form-control" id="username" value="{{ session.get_router }}"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Трафик:</span></h4>
-                        <div class="card-body">
-                            <input type="text" class="form-control" id="username" value="{{ session.get_traffic }} МБ"
-                                   disabled>
-                        </div>
-                    </div>
-                    <div class="card" style="width: auto;">
-                        <h4><span class="badge badge-warning">Статус:</span></h4>
-                        <div class="card-body">
-                            <input type="text" class="form-control" id="status" value="{{ session.get_status }}"
-                                   disabled>
-                        </div>
-                    </div>
+                            <h6 class="card-title">Клиент:</h6>
+                            <p class="card-text">
+                                <a href="{% url "client" session.get_client.id %}">
+                                    {{ session.get_client.fullname }}
+                                </a>
+                            </p>
+                            <hr>
 
+                            <h6 class="card-title">Дата начала:</h6>
+                            <p class="card-text">{{ session.get_start_time }}</p>
+                            <hr>
+
+                            <h6 class="card-title">Дата окончания:</h6>
+                            <p class="card-text">{{ session.get_end_time }}</p>
+                            <hr>
+
+                            <h6 class="card-title">Роутер:</h6>
+                            <p class="card-text"><a
+                                    href="{% url "point" session.get_router.id %}">{{ session.get_router }}</a></p>
+                            <hr>
+
+                            <h6 class="card-title">Трафик:</h6>
+                            <p class="card-text">{{ session.get_traffic }} МБ</p>
+                            <hr>
+
+                            <h6 class="card-title">MAC:</h6>
+                            <p class="card-text">
+                                <a target="_blank"
+                                   href="https://www.networkcenter.info/inform/mac?addr={{ session.callingstationid }}">
+                                    {{ session.callingstationid }}
+                                </a>
+                            </p>
+                            <hr>
+
+                            <h6 class="card-title">Статус:</h6>
+                            <p class="card-text">{{ session.get_status }}</p>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -84,7 +80,7 @@
                                     <td><a target="_blank"
                                            href="https://ru.infobyip.com/ip-{{ flow.dstaddr }}.html">{{ flow.dstaddr }}</a>
                                     </td>
-                                    <td>{{ flow.dstport }}</td>
+                                    <td>{{ flow.dstport }}/{{ flow.get_protocol }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -103,7 +99,8 @@
                                 {% endif %}
 
                                 {% for flow_page in flows.paginator.page_range %}
-                                    <li class="page-item {% if flow_page == flows.number %} active {% endif %}"><a class="page-link" href="?page={{ flow_page }}">{{ flow_page }}</a></li>
+                                    <li class="page-item {% if flow_page == flows.number %} active {% endif %}"><a
+                                            class="page-link" href="?page={{ flow_page }}">{{ flow_page }}</a></li>
                                 {% endfor %}
 
                                 {% if flows.has_next %}
