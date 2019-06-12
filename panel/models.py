@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import Sum
 
 from panel.const import BYTES_IN_MB
-from datetime import timedelta
 from django.utils import timezone
 from datetime import datetime
 
@@ -187,13 +186,13 @@ class Session(models.Model):
         verbose_name_plural = 'Сессии'
 
     def get_start_time(self):
-        return self.acctstarttime + timedelta(hours=5)
+        return self.acctstarttime
 
     def get_end_time(self):
         if self.acctstoptime is None:
             return ""
 
-        return self.acctstoptime + timedelta(hours=5)
+        return self.acctstoptime
 
     def get_traffic(self):
         return round((self.acctinputoctets + self.acctoutputoctets) / BYTES_IN_MB)
@@ -240,7 +239,7 @@ class Flow(models.Model):
         unique_together = ('unix_secs', 'srcaddr', 'dstaddr', 'srcport', 'dstport')
 
     def get_time(self):
-        return timezone.make_aware(datetime.fromtimestamp(self.unix_secs) + timedelta(hours=5),
+        return timezone.make_aware(datetime.fromtimestamp(self.unix_secs),
                                    timezone.get_current_timezone())
 
 
