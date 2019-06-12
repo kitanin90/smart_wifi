@@ -105,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -119,3 +119,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/panel/auth'
+
+SMSC_LOGIN = os.getenv('SMSC_LOGIN')
+SMSC_PASSWORD = os.getenv('SMSC_PASSWORD')
