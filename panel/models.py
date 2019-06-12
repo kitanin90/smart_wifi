@@ -207,7 +207,14 @@ class Session(models.Model):
         return Client.objects.get(username=self.username)
 
     def get_flows(self):
-        return Flow.objects.filter(srcaddr=self.framedipaddress).order_by("-unix_secs")
+        start_time = self.acctstarttime.timestamp()
+        end_time = self.acctstoptime
+
+        if end_time is None:
+            end_time = datetime.today()
+
+        return Flow.objects.filter(srcaddr=self.framedipaddress, unix_secs__gte=start_time,
+                                   unix_secs__lte=end_time.timestamp()).order_by("-unix_secs")
 
 
 class Flow(models.Model):
