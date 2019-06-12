@@ -50,49 +50,66 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 }
 
 
-h3 {
-    font-family: "Lucida Console", serif;
-    text-align: center;
-    padding-top: 15px;
-    color: red;
-    margin-bottom: 10px;
-}
-
-h2 {
-    font-family: "Lucida Console", serif;
-    color: white;
-    font-weight: 700;
-    font-style: italic;
-}
-
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
-}
-
-.card{
-  margin-top:10px;
 }
 
 h4{
   margin-top: 10px;
   color: #00008B;
   font-weight:800;
-﻿
 }
 
 .p-3{
     padding: 0rem !important;
 }
 
-.col-md-10{
-    margin-top: 10px;
+.row {
+    padding-left: 12px;
 }
 
-.w-100{
+.w-100 {
+    color:blue;
+    background-color: #eee;
+    font-weight: 600;
+    border-radius: 8px;
+}
+.panel{
+    border-radius: 8px;
+}
+
+.card-header {
+    /*color: blue;*/
+    font-size: 140%; /* Размер шрифта в процентах */
+    color: black;
+    font-weight: 600;
+    background-color: #FFD700;
+}
+p {
+    font-size: 140%; /* Размер шрифта в процентах */
+    color: black;
+    font-weight: 600;
+}
+
+
+.left-panel {
+    background-color: #DCDCDC;
+    text-align: center;
     border-radius: 10px;
 }
 
-.badge{
-    float:center;
+h3 {
+    font-family: "Lucida Console", serif;
+    text-align: center;
+    padding-top: 15px;
+    color: maroon;
+    font-weight: 600;
+}
+
+
+h6  {
+    color: maroon;
+    font-weight: 600;
+
 }
