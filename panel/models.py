@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import Sum
 
@@ -99,14 +100,6 @@ class ClientReply(models.Model):
         verbose_name_plural = 'Настройки клиентов'
 
 
-class Group(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-
-    class Meta:
-        verbose_name = 'Группа'
-        verbose_name_plural = 'Группы'
-
-
 class UserGroup(models.Model):
     username = models.CharField(max_length=64)
     groupname = models.CharField(max_length=64)
@@ -143,6 +136,13 @@ class GroupReply(models.Model):
     class Meta:
         verbose_name = 'Настройки группы'
         verbose_name_plural = 'Настройки групп'
+
+    @staticmethod
+    def get_value(groupname, paramname, multiply):
+        try:
+            return int(GroupReply.objects.get(groupname=groupname, attribute=paramname).value) // multiply
+        except ObjectDoesNotExist:
+            return None
 
 
 class Session(models.Model):

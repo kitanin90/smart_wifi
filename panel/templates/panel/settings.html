@@ -1,0 +1,55 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}Настройки{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'panel/css/client.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'layout/menu.html' %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="w-100 p-3" style="background-color: #eee;">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            {% for group in groups %}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="{{ group.name }}-tab" data-toggle="tab"
+                                       href="#{{ group.name }}"
+                                       role="tab"
+                                       aria-controls="{{ group.name }}">{{ group.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <form action="" method="post">
+                            {% csrf_token %}
+
+                            <div class="tab-content" id="myTabContent">
+                                {% for group in groups %}
+                                    <div class="tab-pane fade show col-sm-3" id="{{ group.name }}" role="tabpanel"
+                                         aria-labelledby="{{ group.name }}-tab">
+
+                                        {% for param in group.params %}
+                                            <div class="form-group">
+                                                <label for="{{ group.name }}-{{ name }}">{{ param.title }}</label>
+                                                <input type="number" class="form-control"
+                                                       name="{{ group.name }}-{{ param.name }}"
+                                                       id="{{ group.name }}-{{ param.name }}"
+                                                       value="{{ param.value }}">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Сохранить">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

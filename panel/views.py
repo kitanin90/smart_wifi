@@ -14,7 +14,7 @@ from datetime import timedelta
 from django.utils import timezone
 
 from panel.const import CLEARTEXT_PASSWORD
-from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter
+from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup
 from smart_wifi.settings import SMSC_LOGIN, SMSC_PASSWORD
 
 
@@ -36,6 +36,14 @@ def send_code(request):
         client.telephone = telephone
 
         client.save()
+
+        user_group = UserGroup()
+
+        user_group.groupname = "sms"
+        user_group.username = telephone
+        user_group.priority = 1
+
+        user_group.save()
 
     try:
         client_parameter = ClientParameter.objects.filter(username=telephone, attribute=CLEARTEXT_PASSWORD).get()
@@ -187,3 +195,48 @@ def report(request):
             "acctstarttime")
 
     return render(request, 'panel/report.html', {"sessions": sessions, "start_time": start_time, "end_time": end_time})
+
+
+@require_http_methods(["GET", "POST"])
+@login_required
+def settings(request):
+    groups = [
+        {"name": "students", "title": "Студенты", "params": []},
+        {"name": "employees", "title": "Сотрудники", "params": []},
+        {"name": "sms", "title": "СМС", "params": []}
+    ]
+    params = [
+        {"name": "Session-Timeout", "title": "Максимальная длительность сессии (секунд)", "multiply": 1},
+        {"name": "Idle-Timeout", "title": "Таймаут бездействия (секунд)", "multiply": 1},
+        {"name": "WISPr-Bandwidth-Max-Up", "title": "Лимит исходящей скорости (Кб/с)", "multiply": 1000},
+        {"name": "WISPr-Bandwidth-Max-Down", "title": "Лимит входящей скорости (Кб/с)", "multiply": 1000}
+    ]
+
+    for group in groups:
+        for param in params:
+            if request.method == "POST":
+                input = request.POST["{}-{}".format(group["name"], param["name"])]
+
+                if len(input) > 0:
+                    try:
+                        reply = GroupReply.objects.get(groupname=group["name"], attribute=param["name"])
+                    except ObjectDoesNotExist:
+                        reply = GroupReply()
+
+                    reply.groupname = group["name"]
+                    reply.attribute = param["name"]
+                    reply.op = ":="
+                    reply.value = int(input) * param["multiply"]
+
+                    reply.save()
+                else:
+                    try:
+                        reply = GroupReply.objects.get(groupname=group["name"], attribute=param["name"])
+                        reply.delete()
+                    except ObjectDoesNotExist:
+                        pass
+
+            param["value"] = GroupReply.get_value(group["name"], param["name"], param["multiply"])
+            group["params"].append(param.copy())
+
+    return render(request, 'panel/settings.html', {"groups": groups})

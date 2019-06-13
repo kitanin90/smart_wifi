@@ -27,4 +27,7 @@ urlpatterns = [
 
     # Report
     path('panel/report', views.report, name='report'),
+
+    # Settings
+    path('panel/settings', views.settings, name='settings'),
 ]
