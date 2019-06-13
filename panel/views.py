@@ -79,6 +79,8 @@ def auth(request):
         if user is not None:
             login(request, user)
             return redirect('dashboard')
+        else:
+            return render(request, 'panel/auth.html')
     else:
         return render(request, 'panel/auth.html')
 
