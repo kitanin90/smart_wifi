@@ -30,4 +30,7 @@ urlpatterns = [
 
     # Settings
     path('panel/settings', views.settings, name='settings'),
+
+    # Feedback
+    path('panel/feedback_list', views.feedback_list, name='feedback_list'),
 ]

@@ -240,3 +240,6 @@ def settings(request):
             group["params"].append(param.copy())
 
     return render(request, 'panel/settings.html', {"groups": groups})
+
+def feedback_list(request):
+    return render(request, 'panel/feedback_list.html')
