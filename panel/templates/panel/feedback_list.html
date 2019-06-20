@@ -1,0 +1,26 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block title %}Настройки{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'panel/css/feedback_list.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'layout/menu.html' %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="w-100 p-3" style="background-color: #eee;">
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

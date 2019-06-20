@@ -248,11 +248,4 @@ def feedback_list(request):
 @require_http_methods(["GET", "POST"])
 @csrf_protect
 def sendfeedback(request):
-    if request.user.is_authenticated:
-        return render(request, 'sendfeedback.html')
-
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(request, username=username, password=password)
+    return render(request, 'captive/sendfeedback.html')
