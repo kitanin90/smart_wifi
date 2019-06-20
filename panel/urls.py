@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.connect, name='connect'),
     path('code', views.send_code, name='sendcode'),
     path('successful', views.successful_connect, name='successful_connect'),
+    path('sendfeedback', views.sendfeedback, name='sendfeedback'),
 
     path('panel/auth', views.auth, name='auth'),
     path('panel/logout', views.logout_view, name='logout'),
@@ -33,4 +34,7 @@ urlpatterns = [
 
     # Feedback
     path('panel/feedback_list', views.feedback_list, name='feedback_list'),
+
+
+
 ]

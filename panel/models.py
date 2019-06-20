@@ -284,3 +284,4 @@ class NAS(models.Model):
 
     def get_last_10_sessions(self):
         return Session.objects.filter(calledstationid=self.mac).order_by("-acctstarttime")[:10]
+
