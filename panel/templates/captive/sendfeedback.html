@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -9,28 +8,30 @@
     <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'captive/css/sendfeedback.css' %}">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="{% static 'vendor/jquery-3.3.1.slim.min.js' %}"></script>
     <script src="{% static 'vendor/popper.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap.min.js' %}"></script>
 
     <script src="{% static 'captive/js/ChilliLibrary.js' %}"></script>
-
     <!--suppress NonAsciiCharacters -->
-
 </head>
 
-<body class="login-page" style="background: url({% static 'captive/img/frost2.jpg' %}) ;">
-<main>
-    <div class="login-block" id="login_block">
-        <img src="{% static 'captive/img/new21.png' %}" alt="Scanfcode" class="img-responsive center-block"
-             style="width: 100%;">
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Введите текст</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    <h1>Hi</h1>
-    </div>
-</main>
+<body >
+
+<div class="contact-section">
+
+    <h1>Отзыв</h1>
+    <div class="border"></div>
+    <form class="contact-form" action="sendfeedback.html" method="post">
+        <input type="text" class="contact-form-text" placeholder="ФИО">
+        <input type="telephone" class="contact-form-text" placeholder="Номер телефона">
+        <input type="text" class="contact-form-text" placeholder="Заголовок">
+        <textarea class="contact-form-text" placeholder="Ваше сообщение"></textarea>
+        <input type="submit" class="contact-form-btn" value="Отправить">
+        <a href="">Вернуться назад</a>
+    </form>
+</div>
+
 </body>
 </html>
