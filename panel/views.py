@@ -14,7 +14,7 @@ from datetime import timedelta
 from django.utils import timezone
 
 from panel.const import CLEARTEXT_PASSWORD
-from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup
+from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup, Feedback
 from smart_wifi.settings import SMSC_LOGIN, SMSC_PASSWORD
 
 
@@ -241,11 +241,13 @@ def settings(request):
 
     return render(request, 'panel/settings.html', {"groups": groups})
 
-def feedback_list(request):
-    return render(request, 'panel/feedback_list.html')
+def feedbacks_list(request):
+    feedbacks = Feedback.objects.all()
+    return render(request, 'panel/feedback_list.html', context={'feedbacks': feedbacks})
 
 
-@require_http_methods(["GET", "POST"])
+
+@require_http_methods(["POST"])
 @csrf_protect
 def sendfeedback(request):
     return render(request, 'captive/sendfeedback.html')

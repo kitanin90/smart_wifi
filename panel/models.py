@@ -285,3 +285,14 @@ class NAS(models.Model):
     def get_last_10_sessions(self):
         return Session.objects.filter(calledstationid=self.mac).order_by("-acctstarttime")[:10]
 
+
+class Feedback(models.Model):
+    username = models.CharField(max_length=64, verbose_name="username")
+    telephone = models.CharField(max_length=255, verbose_name="Телефон")
+    title = models.CharField(max_length=150, verbose_name="Заголовок")
+    description = models.TextField(blank=True, verbose_name="Текст")
+    date_pub = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+
+    def __str__(self):
+        return '{}'.format(self.title)
+
