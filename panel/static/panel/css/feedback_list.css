@@ -1,4 +1,4 @@
-.body{
+.body {
     margin: 0;
     padding: 0;
 }
@@ -35,18 +35,46 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 .dropdown-item {
     font-family: "Lucida Console", serif
 }
+
 /*Убираем боковые отступы в шапке*/
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
 }
 
-.center-panel{
+.center-panel {
     width: 800px;
     margin-left: 500px;
-    padding: 10px 0px 10px;
+    padding: 2px 0px 2px;
 }
 
+.card-header {
+    font-size: 150%; /* Размер шрифта в процентах */
+    color: black;
+    font-weight: 600;
+    background-color: #FFD700;
+}
 h5{
+    font-weight: 600
+}
 
+/*Свойства Кнопки */
+.btn-light{
+    float:right;
+    border: 0;
+    background: #34495e;
+    color: #ffffff;
+    padding: 3px 50px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.btn-light:hover{
+    background: #2980b9;
+}
+
+/* /-///-///////-         */
+
+.mb-4{
+    margin-bottom: 10px !important;
 }
