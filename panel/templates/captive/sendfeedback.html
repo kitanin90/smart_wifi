@@ -1,23 +1,13 @@
+{% extends 'layout/base.html' %}
 {% load static %}
-<html lang="ru">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Обратная связь</title>
+{% block title %}Обратная связь{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendor/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'captive/css/sendfeedback.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="{% static 'vendor/jquery-3.3.1.slim.min.js' %}"></script>
-    <script src="{% static 'vendor/popper.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap.min.js' %}"></script>
+{% block style %}
+<link rel="stylesheet" href="{% static 'captive/css/sendfeedback.css' %}">
+{% endblock %}
 
-    <script src="{% static 'captive/js/ChilliLibrary.js' %}"></script>
-    <!--suppress NonAsciiCharacters -->
-</head>
-
-<body >
+{% block content %}
 
 <div class="contact-section">
 
@@ -33,5 +23,4 @@
     </form>
 </div>
 
-</body>
-</html>
+{% endblock %}

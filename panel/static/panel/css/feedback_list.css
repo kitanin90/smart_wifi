@@ -1,3 +1,8 @@
+.body{
+    margin: 0;
+    padding: 0;
+}
+
 html {
     overflow-x: hidden;
 }
@@ -18,11 +23,6 @@ li.nav-item.active, li.nav-item:hover, li.nav-item:focus {
 }
 
 /* делаем заливку для активного этлемента и элементов при наведении */
-
-.btn-group {
-    padding: 0
-}
-
 .dropdown-toggle, .dropdown-toggle:active {
     color: #fff;
     font-weight: 600
@@ -35,54 +35,18 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 .dropdown-item {
     font-family: "Lucida Console", serif
 }
-
-.left-panel {
-     text-align: center;
-     padding-left:10px;
-}
-
-.panel {
-    background-color: #DCDCDC;
-}
-
-.navbar-brand {
-    margin-left: 50px;
-    font-family: "Lucida Console", serif
-}
-
-
-h3 {
-    font-family: "Lucida Console", serif;
-    text-align: center;
-    padding-top: 1px;
-    /*color: white;*/
-    background-color: #FFD700;
-    color: black;
-}
-
+/*Убираем боковые отступы в шапке*/
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
 }
 
-.w-100 {
-    color:blue;
-    background-color: #eee;
-    font-weight: 600;
-    border-radius: 8px;
+.center-panel{
+    width: 800px;
+    margin-left: 500px;
+    padding: 10px 0px 10px;
 }
 
-.card-header {
-    /*color: blue;*/
-    font-size: 140%; /* Размер шрифта в процентах */
-    color: black;
-    font-weight: 600;
-    background-color: #FFD700;
-}
+h5{
 
-h6 {
-    color: maroon;
-    font-weight: 600;
-    font-family: 'Times New Roman', Times, serif; /* Гарнитура текста */
-    font-size: 170%; /* Размер шрифта в процентах */
 }
