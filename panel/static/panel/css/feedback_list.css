@@ -59,7 +59,7 @@ h5{
 }
 
 /*Свойства Кнопки */
-.btn-light{
+.btn-light, btn-primary{
     float:right;
     border: 0;
     background: #34495e;
@@ -69,7 +69,7 @@ h5{
     cursor: pointer;
     transition: 0.5s;
 }
-.btn-light:hover{
+.btn-light:hover, btn-primary:hover{
     background: #2980b9;
 }
 
