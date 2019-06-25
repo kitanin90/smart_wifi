@@ -9,9 +9,13 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
+from django.views.generic import View
+from django.shortcuts import get_object_or_404
 
 from datetime import timedelta
 from django.utils import timezone
+from .forms import FeedbackForm
+
 
 from panel.const import CLEARTEXT_PASSWORD
 from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup, Feedback
@@ -241,9 +245,9 @@ def settings(request):
 
     return render(request, 'panel/settings.html', {"groups": groups})
 
-
-def sendfeedback(request):
-    return render(request, 'captive/sendfeedback.html')
+#
+# def sendfeedback(request):
+#     return render(request, 'captive/sendfeedback.html')
 
 
 def feedbacks_list(request):
@@ -254,3 +258,15 @@ def feedbacks_list(request):
 # def feedback_detail(request, feedback_id):
 #     feedbacks = Feedback.objects.get(id=feedback_id)
 #     return render(request, 'panel/feedback_detail.html', context={'feedbacks': feedbacks})
+
+class FeedbackCreate(View):
+    def get(self, request):
+        form = FeedbackForm()
+        return render(request, 'captive/sendfeedback.html', context={'form': form})
+
+    def post(self, request):
+        bound_form = FeedbackForm(request.POST)
+        if bound_form.is_valid():
+            new_post = bound_form.save()
+            return redirect('/')
+        return render(request, 'captive/sendfeedback.html', context={'form': bound_form})

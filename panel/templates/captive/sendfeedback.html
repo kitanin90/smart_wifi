@@ -8,18 +8,17 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="contact-section">
-
     <h1>Отзыв</h1>
     <div class="border"></div>
-    <form class="contact-form" action="sendfeedback.html" method="post">
-        <input type="text" class="contact-form-text" placeholder="ФИО">
-        <input type="telephone" class="contact-form-text" placeholder="Номер телефона">
-        <input type="text" class="contact-form-text" placeholder="Заголовок">
-        <textarea class="contact-form-text" placeholder="Ваше сообщение"></textarea>
+    <form class="contact-form" action="{% url 'feedback_create_url' %}" method="post">
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.telephone }}
+        {{ form.title }}
+        {{ form.description }}
+
         <input type="submit" class="contact-form-btn" value="Отправить">
-        <a href=" ">Вернуться назад</a>
     </form>
 </div>
 

@@ -294,4 +294,4 @@ class Feedback(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return self.title
