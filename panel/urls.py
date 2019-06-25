@@ -34,6 +34,6 @@ urlpatterns = [
 
     # Feedback
     path('panel/feedback_list', views.feedbacks_list, name='feedbacks_list'),
-    path('panel/feedback_list/<int:feedback_id>', views.feedback_detail, name='feedback_detail_url')
+    # path('panel/feedback_list/<int:feedback_id>', views.feedback_detail, name='feedback_detail_url')
 
 ]

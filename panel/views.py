@@ -242,7 +242,6 @@ def settings(request):
     return render(request, 'panel/settings.html', {"groups": groups})
 
 
-
 def sendfeedback(request):
     return render(request, 'captive/sendfeedback.html')
 
@@ -251,7 +250,7 @@ def feedbacks_list(request):
     feedbacks = Feedback.objects.all()
     return render(request, 'panel/feedback_list.html', context={'feedbacks': feedbacks})
 
-
-def feedback_detail(request, feedback_id):
-    feedbacks = Feedback.objects.get(id=feedback_id)
-    return render(request, 'panel/feedback_detail.html', context={'feedbacks': feedbacks})
+#
+# def feedback_detail(request, feedback_id):
+#     feedbacks = Feedback.objects.get(id=feedback_id)
+#     return render(request, 'panel/feedback_detail.html', context={'feedbacks': feedbacks})
