@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -30,6 +29,9 @@
                     onClick='location.href="http://edu.strbsu.ru/"'>Узнать расписание
             </button>
             <hr class="hr-xs">
+            <div class="form-group">
+                <a href="{% url 'feedback_create_url' %}">Обратная связь</a>
+            </div>
         </div>
     </div>
 </main>

@@ -1,35 +1,39 @@
-body{
+body {
     margin: 0;
     padding: 0;
     font-family: "montserrat", sans-serif;
-    overflow:  hidden;
+    overflow: hidden;
+    background: url("../img/fon2.jpg") no-repeat center;
 }
-.contact-section{
+
+.contact-section {
     background: url("../img/fon2.jpg") no-repeat center;
     background-size: cover;
     padding: 40px 0;
 }
-.contact-section h1{
+
+.contact-section h1 {
     text-align: center;
     color: #d6d8d9;
     font-size: 350%;
     padding-top: 95px;
 }
-.border{
+
+.border {
     width: 100px;
     height: 10px;
     background: #34495e;
     margin: 40px auto;
 }
 
-.contact-form{
+.contact-form-class {
     max-width: 600px;
     margin: auto;
     padding: 0 10px;
     overflow: hidden;
 }
 
-.contact-form-text{
+.form-control {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -41,15 +45,18 @@ body{
     color: #d6d8d9;
     transition: 0.5s;
 }
-.contact-form-text:focus{
-    box-shadow: 0 0 10px 4px #34495e;  /*при наведении мышки меняет цвет границ*/
+
+.form-control:focus {
+    box-shadow: 0 0 10px 4px #34495e; /*при наведении мышки меняет цвет границ*/
 }
-.textarea.contact-form-text{
+
+.textarea.contact-form-text {
     resize: none;
     height: 120px;
 }
-.contact-form-btn{
-    float:right;
+
+.contact-form-btn {
+    float: right;
     border: 0;
     background: #34495e;
     color: #ffffff;
@@ -58,22 +65,24 @@ body{
     cursor: pointer;
     transition: 0.5s;
 }
-.contact-form-btn:hover{
+
+.contact-form-btn:hover {
     background: #2980b9;
 }
 
-textarea{
+textarea {
     height: 300px;
 }
-.contact-form a{
-    color: white;
-    text-decoration: none;
-    font-family: "montserrat", sans-serif;
-    font-size: 14px;
-    padding: 10px;
-    transition: 0.8s;
-}
 
-.contact-form a:hover{
-    background: rgba(0,0,0,.3);
-}
+/*.contact-form-class a {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*    font-family: "montserrat", sans-serif;*/
+/*    font-size: 14px;*/
+/*    padding: 10px;*/
+/*    transition: 0.8s;*/
+/*}*/
+
+/*.contact-form a:hover {*/
+/*    background: rgba(0, 0, 0, .3);*/
+/*}*/
