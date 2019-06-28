@@ -295,3 +295,11 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BDUpload(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Название")
+    file = models.FileField(upload_to='csv_file')
+
+    def __str__(self):
+        return self.name
