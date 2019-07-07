@@ -40,7 +40,7 @@ class Client(models.Model):
 
     sms_auth = models.BooleanField(default=False, verbose_name="СМС авторизация")
 
-    telephone = models.CharField(max_length=255, verbose_name="Телефон",blank=True)
+    telephone = models.CharField(max_length=255, verbose_name="Телефон", blank=True)
 
     faculty = models.ForeignKey("Faculty", blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name="Факультет")
 
@@ -53,6 +53,30 @@ class Client(models.Model):
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
+
+    @staticmethod
+    def translit(username):
+        ru = {
+            'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
+            'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i', 'й': "i",
+            'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+            'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+            'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+            'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya', '-': '-', ".": ""
+        }
+
+        username = username.replace("ь", "")
+        username = username.replace("ъ", "")
+
+        result = ""
+
+        for s in username:
+            if s.isupper():
+                result += ru[s.lower()].capitalize()
+            else:
+                result += ru[s]
+
+        return result
 
     def get_traffic_from_date(self, date):
         return Session.objects.filter(acctstarttime__gte=date, username=self.username).aggregate(

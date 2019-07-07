@@ -1,12 +1,14 @@
 from random import randint
+import csv
+import io
 
 import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 from django.views.generic import View
@@ -14,8 +16,7 @@ from django.shortcuts import get_object_or_404
 
 from datetime import timedelta
 from django.utils import timezone
-from .forms import FeedbackForm
-
+from .forms import FeedbackForm, UploadFileForm
 
 from panel.const import CLEARTEXT_PASSWORD
 from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup, Feedback
@@ -245,10 +246,6 @@ def settings(request):
 
     return render(request, 'panel/settings.html', {"groups": groups})
 
-#
-# def sendfeedback(request):
-#     return render(request, 'captive/sendfeedback.html')
-
 
 def feedbacks_list(request):
     feedbacks = Feedback.objects.all()
@@ -266,3 +263,58 @@ class FeedbackCreate(View):
             new_post = bound_form.save()
             return redirect('/')
         return render(request, 'captive/sendfeedback.html', context={'form': bound_form})
+
+
+@require_http_methods(["GET", "POST"])
+@csrf_protect
+def upload_file(request):
+    if request.method == 'POST':
+        data = request.FILES["file"].read().decode("cp1251").splitlines()
+
+        reader = csv.reader(data[6:], delimiter=';')
+
+        i = 0
+        for row in reader:
+            fullname = row[2].replace("  ", " ").strip().split(" ")
+
+            if len(fullname) < 2:
+                continue
+
+            password = row[6]
+
+            lastname = fullname[0]
+            firstname = fullname[1]
+
+            patronymic = ""
+            if len(fullname) > 2:
+                patronymic = fullname[2]
+
+            username = Client.translit("{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else ""))
+
+            if not Client.objects.filter(username=username).exists():
+                i += 1
+
+                client = Client()
+                client.lastname = lastname
+                client.firstname = firstname
+                client.patronymic = patronymic
+                client.username = username
+                client.save()
+
+                try:
+                    client_parameter = ClientParameter.objects.filter(username=username,
+                                                                      attribute=CLEARTEXT_PASSWORD).get()
+                except ObjectDoesNotExist:
+                    client_parameter = ClientParameter()
+
+                client_parameter.username = username
+                client_parameter.attribute = CLEARTEXT_PASSWORD
+                client_parameter.op = ":="
+                client_parameter.value = password
+
+                client_parameter.save()
+
+        return render(request, 'panel/upload_file.html', {'count': i})
+    else:
+        return render(request, 'panel/upload_file.html')
+
