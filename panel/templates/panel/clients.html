@@ -48,7 +48,6 @@
                             </thead>
                             <tbody>
                             {% for client in client_list %}
-
                             <tr>
                                 <th scope="row"><a href="{% url "client" client.id %}">{{ client.id }}</a></th>
                                 <td>{{ client.lastname }}</td>

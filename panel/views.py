@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 
 from datetime import timedelta
 from django.utils import timezone
-from .forms import FeedbackForm, UploadFileForm
+from .forms import FeedbackForm
 
 from panel.const import CLEARTEXT_PASSWORD
 from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup, Feedback
@@ -280,8 +280,7 @@ def upload_file(request):
             if len(fullname) < 2:
                 continue
 
-            password = row[6]
-
+            numberbook = row[6]
             lastname = fullname[0]
             firstname = fullname[1]
 
@@ -289,6 +288,7 @@ def upload_file(request):
             if len(fullname) > 2:
                 patronymic = fullname[2]
 
+            password = ClientParameter.translit_pass("{}".format(numberbook))
             username = Client.translit("{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else ""))
 
             if not Client.objects.filter(username=username).exists():
@@ -299,11 +299,13 @@ def upload_file(request):
                 client.firstname = firstname
                 client.patronymic = patronymic
                 client.username = username
+                client.status = 'student'
                 client.save()
 
                 try:
                     client_parameter = ClientParameter.objects.filter(username=username,
-                                                                      attribute=CLEARTEXT_PASSWORD).get()
+                                                                      attribute=CLEARTEXT_PASSWORD,
+                                                                      value=password).get()
                 except ObjectDoesNotExist:
                     client_parameter = ClientParameter()
 

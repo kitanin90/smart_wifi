@@ -109,6 +109,33 @@ class ClientParameter(models.Model):
         verbose_name = 'Параметры клиента'
         verbose_name_plural = 'Параметры клиентов'
 
+    @staticmethod
+    def translit_pass(value):
+
+        ru = {
+            '0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9',
+            'а': 'a', 'a': 'a', 'б': 'b', 'b': 'b', 'в': 'v', 'v': 'v', 'г': 'g', 'g': 'g', 'д': 'd', 'd': 'd',
+            'е': 'e', 'e': 'e', 'ё': 'e', 'ж': 'j', 'j': 'j', 'з': 'z', 'z': 'z', 'и': 'i', 'i': 'i', 'й': "i",
+            'i': "i", 'к': 'k', 'k': 'k', 'л': 'l', 'l': 'l', 'м': 'm', 'm': 'm', 'н': 'n', 'n': 'n', 'о': 'o',
+            'o': 'o', 'п': 'p', 'p': 'p', 'р': 'r', 'r': 'r', 'с': 's', 's': 's', 'т': 't', 't': 't', 'у': 'u',
+            'u': 'u', 'ф': 'f', 'f': 'f', 'х': 'h', 'h': 'h', 'ц': 'c', 'c': 'c', 'ч': 'ch', 'ch': 'ch', 'ш': 'sh',
+            'sh': 'sh', 'щ': 'shch', 'ы': 'y', 'y': 'y', 'э': 'e', 'e': 'e', 'ю': 'u', 'u': 'u', 'я': 'ya', '-': '-', ".": "", " ": "",
+            'c': 'c', 's': 's',
+
+        }
+        value = value.replace("ь", "")
+        value = value.replace("ъ", "")
+
+        result = ""
+
+        for s in value:
+            if s.isupper():
+                result += ru[s.lower()].capitalize()
+            else:
+                result += ru[s]
+
+        return result
+
 
 class ClientReply(models.Model):
     username = models.CharField(max_length=64)
