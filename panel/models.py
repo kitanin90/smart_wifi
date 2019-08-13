@@ -136,6 +136,7 @@ class ClientParameter(models.Model):
         return result
 
 
+
 class ClientReply(models.Model):
     username = models.CharField(max_length=64)
     attribute = models.CharField(max_length=64)

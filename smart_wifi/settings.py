@@ -125,3 +125,5 @@ SMSC_PASSWORD = os.getenv('SMSC_PASSWORD')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None

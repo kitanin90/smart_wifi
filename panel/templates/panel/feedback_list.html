@@ -10,57 +10,19 @@
 {% block content %}
     {% include 'layout/menu.html' %}
 
-    <div class="container-fluid">
-        <div class="center-panel">
-            {% for feedback in feedbacks %}
+    <div class="center-panel">
+        {% for feedback in feedbacks %}
 
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5>{{ feedback.date_pub }} | Автор: {{ feedback.username }}</h5>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ feedback.title }}</h5>
-                        <p class="card-text">{{ feedback.description|truncatewords:10 }}</p>
-                        <!--                <a href="#" class="btn btn-light">Read</a>-->
-
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#exampleModalLong">
-                            Подробнее
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLongTitle"
-                             aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    {% for feedback in feedbacks %}
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">{{ feedback.title }} |
-                                                <i>Дата: {{ feedback.date_pub }}</i></h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{ feedback.description }}
-                                            <br>
-                                            <b>Автор: {{ feedback.username }}</b>
-                                        </div>
-                                    {% endfor %}
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5>{{ feedback.date_pub }} | Автор: {{ feedback.username }}</h5>
                 </div>
-            {% endfor %}
-        </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ feedback.title }}</h5>
+                    <p class="card-text">{{ feedback.description|truncatewords:10 }}</p>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
 

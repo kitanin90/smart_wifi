@@ -288,7 +288,12 @@ def upload_file(request):
             if len(fullname) > 2:
                 patronymic = fullname[2]
 
+            # Faculty.objects.filter(name="ФМиИТ")
+            # if row[5] == 'ПМИ':
+            #     Faculty.objects.filter(name="ФМиИТ")
+
             password = ClientParameter.translit_pass("{}".format(numberbook))
+
             username = Client.translit("{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else ""))
 
             if not Client.objects.filter(username=username).exists():

@@ -43,9 +43,10 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
 }
 
 .center-panel {
-    width: 800px;
-    margin-left: 500px;
+    max-width: 800px;
+    /*margin-left: 500px;*/
     padding: 2px 0px 2px;
+    position: center;
 }
 
 .card-header {
@@ -72,8 +73,6 @@ h5{
 .btn-light:hover, btn-primary:hover{
     background: #2980b9;
 }
-
-/* /-///-///////-         */
 
 .mb-4{
     margin-bottom: 10px !important;
