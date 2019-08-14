@@ -62,7 +62,7 @@ class Client(models.Model):
             'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
             'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
             'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
-            'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya', '-': '-', ".": ""
+            'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya', '-': '-', ".": "", " ": ""
         }
 
         username = username.replace("ь", "")
@@ -134,7 +134,6 @@ class ClientParameter(models.Model):
                 result += ru[s]
 
         return result
-
 
 
 class ClientReply(models.Model):

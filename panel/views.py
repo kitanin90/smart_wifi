@@ -1,6 +1,6 @@
 from random import randint
 import csv
-import io
+
 
 import requests
 from django.contrib.auth import authenticate, login, logout
@@ -288,9 +288,6 @@ def upload_file(request):
             if len(fullname) > 2:
                 patronymic = fullname[2]
 
-            # Faculty.objects.filter(name="ФМиИТ")
-            # if row[5] == 'ПМИ':
-            #     Faculty.objects.filter(name="ФМиИТ")
 
             password = ClientParameter.translit_pass("{}".format(numberbook))
 

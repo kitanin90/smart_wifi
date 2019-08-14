@@ -2,7 +2,6 @@ from django import forms
 from .models import Feedback
 from django.core.exceptions import ValidationError
 
-# class FeedbackForm(forms.ModelForm):
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
