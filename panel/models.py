@@ -31,6 +31,18 @@ class Faculty(models.Model):
         verbose_name_plural = 'Факультеты'
 
 
+class Group(models.Model):
+    name = models.CharField(max_length=255, blank=True, verbose_name="Название")
+    # faculty = models.ForeignKey("Faculty", verbose_name="Факультет",  on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Учебная группа'
+        verbose_name_plural = 'Учебные группы'
+
+
 class Client(models.Model):
     lastname = models.CharField(max_length=255, blank=True, verbose_name="Фамилия")
     firstname = models.CharField(max_length=255, blank=True, verbose_name="Имя")
@@ -43,6 +55,8 @@ class Client(models.Model):
     telephone = models.CharField(max_length=255, verbose_name="Телефон", blank=True)
 
     faculty = models.ForeignKey("Faculty", blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name="Факультет")
+
+    group = models.ForeignKey("Group", blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name="Группа")
 
     def fullname(self):
         return "{} {} {}".format(self.lastname, self.firstname, self.patronymic) if not self.sms_auth else self.username
@@ -119,7 +133,8 @@ class ClientParameter(models.Model):
             'к': 'k', 'k': 'k', 'л': 'l', 'l': 'l', 'м': 'm', 'm': 'm', 'н': 'n', 'n': 'n', 'о': 'o',
             'o': 'o', 'п': 'p', 'p': 'p', 'р': 'r', 'r': 'r', 'т': 't', 't': 't', 'у': 'u', 'ц': 'c', 'c': 'c',
             'u': 'u', 'ф': 'f', 'f': 'f', 'х': 'h', 'h': 'h', 'ч': 'ch', 'ch': 'ch', 'ш': 'sh', 'с': 's', 's': 's',
-            'sh': 'sh', 'щ': 'shch', 'ы': 'y', 'y': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya', '-': '-', ".": "", " ": "",
+            'sh': 'sh', 'щ': 'shch', 'ы': 'y', 'y': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya', '-': '-', '.': '', ' ': '',
+            '/': '/'
         }
 
         value = value.replace("ь", "")

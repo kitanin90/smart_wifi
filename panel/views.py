@@ -1,6 +1,6 @@
 from random import randint
 import csv
-
+import re
 
 import requests
 from django.contrib.auth import authenticate, login, logout
@@ -19,7 +19,7 @@ from django.utils import timezone
 from .forms import FeedbackForm
 
 from panel.const import CLEARTEXT_PASSWORD
-from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup, Feedback
+from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup, Feedback, Group
 from smart_wifi.settings import SMSC_LOGIN, SMSC_PASSWORD
 
 
@@ -284,9 +284,21 @@ def upload_file(request):
             lastname = fullname[0]
             firstname = fullname[1]
 
+            name_group_bad = row[5].rsplit("-", 1)
+            name_group = name_group_bad[1]
+
             patronymic = ""
             if len(fullname) > 2:
                 patronymic = fullname[2]
+
+
+            # facultys = {
+            #     'ФМиИТ': ('ПМИ', 'АИС'),
+            #     'ЕНФ': ('ФИЗ', 'ХИМ')
+            # }
+
+            group_in_csv = re.sub(r"\d+", "", name_group, flags=re.UNICODE)   # Удаляет символы из строки
+
 
 
             password = ClientParameter.translit_pass("{}".format(numberbook))
@@ -302,6 +314,12 @@ def upload_file(request):
                 client.patronymic = patronymic
                 client.username = username
                 client.status = 'student'
+                # client.faculty =
+
+                if not Group.objects.filter(name=group_in_csv).exists():
+                    name_group_bd = Group.objects.create(name=group_in_csv)
+                    client.group = name_group_bd
+
                 client.save()
 
                 try:

@@ -1,8 +1,3 @@
-.body {
-    margin: 0;
-    padding: 0;
-}
-
 html {
     overflow-x: hidden;
 }
@@ -23,6 +18,11 @@ li.nav-item.active, li.nav-item:hover, li.nav-item:focus {
 }
 
 /* делаем заливку для активного этлемента и элементов при наведении */
+
+.btn-group {
+    padding: 0
+}
+
 .dropdown-toggle, .dropdown-toggle:active {
     color: #fff;
     font-weight: 600
@@ -36,44 +36,33 @@ li.dropdown-item:visited, li.dropdown-item:active, li.dropdown-item:hover, li.dr
     font-family: "Lucida Console", serif
 }
 
-/*Убираем боковые отступы в шапке*/
-.container-fluid {
-    padding-left: 0;
-    padding-right: 0;
+.left-panel {
+     text-align: center;
+     padding-left:10px;
 }
 
-.center-panel {
-    max-width: 800px;
-    /*margin-left: 500px;*/
-    padding: 2px 0px 2px;
-    position: center;
+.panel {
+    background-color: #DCDCDC;
 }
 
-.card-header {
-    font-size: 150%; /* Размер шрифта в процентах */
-    color: black;
-    font-weight: 600;
-    background-color: #FFD700;
+.navbar-brand {
+    margin-left: 50px;
+    font-family: "Lucida Console", serif
 }
+
+
 h5{
     font-weight: 600
 }
 
-/*Свойства Кнопки */
-.btn-light, btn-primary{
-    float:right;
-    border: 0;
-    background: #34495e;
-    color: #ffffff;
-    padding: 3px 50px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: 0.5s;
-}
-.btn-light:hover, btn-primary:hover{
-    background: #2980b9;
+.container-fluid{
+    padding: 0;
 }
 
-.mb-4{
-    margin-bottom: 10px !important;
+.card-header{
+    background-color: #FFD700;
+}
+
+.card-title{
+    color: #0056b3;
 }
