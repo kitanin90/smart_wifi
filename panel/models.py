@@ -92,6 +92,31 @@ class Client(models.Model):
 
         return result
 
+    @staticmethod
+    def translit_for_repeater(username_for_repeater):
+        ru = {
+            'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'q': 'q', 'w': 'w', 'e': 'e',
+            'е': 'e', 'ё': 'e', 'ж': 'j', 'з': 'z', 'и': 'i', 'й': "i",  'r': 'r', 't': 't', 'y': 'y', 'u': 'u',
+            'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'i': 'i', 'o': 'o', 'p': 'p', 'a': 'a', 's': 's',
+            'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'd': 'd', 'f': 'f', 'g': 'g', 'h': 'h', 'j': 'j',
+            'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh', 'k': 'k', 'l': 'l', 'z': 'z', 'x': 'x', 'c': 'c',
+            'щ': 'shch', 'ы': 'y', 'э': 'e', 'ю': 'u', 'я': 'ya', '-': '-', ".": "", " ": "", '_':'_',  'v': 'v',
+            'b': 'b', 'n': 'n', 'm': 'm'
+        }
+
+        username_for_repeater = username_for_repeater.replace("ь", "")
+        username_for_repeater = username_for_repeater.replace("ъ", "")
+
+        result = ""
+
+        for s in username_for_repeater:
+            if s.isupper():
+                result += ru[s.lower()].capitalize()
+            else:
+                result += ru[s]
+
+        return result
+
     def get_traffic_from_date(self, date):
         return Session.objects.filter(acctstarttime__gte=date, username=self.username).aggregate(
             download=Sum("acctinputoctets") / BYTES_IN_MB,

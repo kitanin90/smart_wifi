@@ -386,6 +386,8 @@ def upload_file(request):
 
             password = ClientParameter.translit_pass("{}".format(numberbook))
             username = Client.translit("{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else ""))
+            username_for_repeater = Client.translit_for_repeater(
+                "{}{}{}".format(lastname, firstname[0:3], patronymic[0:3] if len(patronymic) > 0 else ""))
 
             if group_in_csv in list_building:
                 if not Building.objects.filter(name=list_building[group_in_csv]):
@@ -397,7 +399,6 @@ def upload_file(request):
                 if not Faculty.objects.filter(name=list_facultys[group_in_csv]):
                     faculty = Faculty()
                     faculty.name = list_facultys[group_in_csv]
-                    # faculty.building = Building.objects.get(name=list_building[group_in_csv])[0]
                     faculty.building = Building.objects.get(name=list_building[group_in_csv])
                     faculty.save()
 
@@ -422,6 +423,31 @@ def upload_file(request):
                     client_parameter = ClientParameter()
 
                 client_parameter.username = username
+                client_parameter.attribute = CLEARTEXT_PASSWORD
+                client_parameter.op = ":="
+                client_parameter.value = password
+                client_parameter.save()
+            else:
+                client = Client()
+                client.lastname = lastname
+                client.firstname = firstname
+                client.patronymic = patronymic
+                client.username = username_for_repeater
+                client.status = 'student'
+                client.faculty = Faculty.objects.get(name=list_facultys[group_in_csv])
+                client.group = Group.objects.get_or_create(name=group_in_csv)[0]
+                # if client.username == Client.objects.filter(username=username_for_repeater):
+                #     pass
+                client.save()
+
+                try:
+                    client_parameter = ClientParameter.objects.filter(username=username,
+                                                                      attribute=CLEARTEXT_PASSWORD,
+                                                                      value=password).get()
+                except ObjectDoesNotExist:
+                    client_parameter = ClientParameter()
+
+                client_parameter.username = client.username
                 client_parameter.attribute = CLEARTEXT_PASSWORD
                 client_parameter.op = ":="
                 client_parameter.value = password
