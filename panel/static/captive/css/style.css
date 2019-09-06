@@ -125,3 +125,28 @@
         padding: 20px
     }
 }
+
+.down-panel {
+    background-color: white;
+    border-radius: 1px;
+    font-family: Arial, Helvetica, Verdana, sans-serif; /* Гарнитура шрифта */
+    font-weight: lighter; /* Светлое начертание */
+    font-weight: 600;
+    border-radius: 3px;
+}
+p{
+
+    margin: 10px 20px 10px 20px;
+    font-family: 'Playfair Display SC', serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 15px;
+    color: #222222;
+    text-align: center;
+    }
+p1{
+    font-family: 'Playfair Display SC', serif;
+    text-align: center;
+    margin-left: 60px;
+
+}

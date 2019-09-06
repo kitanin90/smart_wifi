@@ -319,8 +319,8 @@ def upload_file(request):
                 'БД': 'Колледж', 'СА': 'Колледж',  'Ф': 'Колледж', 'ZПСО': 'Колледж', 'ZЭ': 'Колледж',
                 'ZSАФК': 'СОП', 'ZФК': 'СОП', 'ZАФК': 'СОП', 'ZЯНРФ': 'СОП', 'ZОПИПО': 'СОП',
                 'ZПН': 'СОП', 'ZРЛЗ': 'СОП', 'ZРЛ': 'СОП', 'ZОП': 'СОП',  'ZППС': 'СОП', 'БЯ': 'СОП', 'ТИМПО': 'СОП',
-                'ТТТ': 'СОП'
-                 # 'ZППС': 'СОП'
+                'ТТТ': 'СОП',
+                'ТЧР': 'Преподаватели', 'ЦИТ': 'ЦИТ'
             }
 
             list_building = {
@@ -364,7 +364,9 @@ def upload_file(request):
                 '3Ф': 'Корпус Колледжа', '3Э': 'Корпус Колледжа', '4НО': 'Корпус Колледжа', 'Z3Э': 'Корпус Колледжа',
                 'Z3ПСО': 'Корпус Колледжа',  'СА': 'Корпус Колледжа', 'Ф': 'Корпус Колледжа',
                 'ZSАФК': 'СОП', 'ZАФК': 'СОП', 'ZФК': 'СОП', 'ZЯНРФ': 'СОП', 'ZОПИПО': 'СОП', 'БЯ': 'СОП',
-                'ZПН': 'СОП', 'ZРЛЗ': 'СОП', 'ZРЛ': 'СОП', 'ZОП': 'СОП', 'ZППС': 'СОП', 'ТИМПО': 'СОП', 'ТТТ': 'СОП'
+                'ZПН': 'СОП', 'ZРЛЗ': 'СОП', 'ZРЛ': 'СОП', 'ZОП': 'СОП', 'ZППС': 'СОП', 'ТИМПО': 'СОП', 'ТТТ': 'СОП',
+                'ТЧР': 'Все Преподаватели', 'ЦИТ': 'Отдел ЦИТ'
+
             }
 
             list_address = {
@@ -376,6 +378,8 @@ def upload_file(request):
                 'Корпус Колледжа': 'Элеваторная 80',
                 'СОП': 'Пр.Ленина, д.49',
                 'Корпус ЕНФ': 'Пр.Ленина, д.49а',
+                'Все Преподаватели': 'Пр.Ленина, д.49а',
+                'Отдел ЦИТ': 'Пр.Ленина, д.49а',
             }
 
             # group_in_csv
@@ -387,7 +391,7 @@ def upload_file(request):
             password = ClientParameter.translit_pass("{}".format(numberbook))
             username = Client.translit("{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else ""))
             username_for_repeater = Client.translit_for_repeater(
-                "{}{}{}".format(lastname, firstname[0:3], patronymic[0:3] if len(patronymic) > 0 else ""))
+                "{}{}{}".format(lastname, firstname[0:4], patronymic[0:4] if len(patronymic) > 0 else ""))
 
             if group_in_csv in list_building:
                 if not Building.objects.filter(name=list_building[group_in_csv]):
@@ -410,7 +414,12 @@ def upload_file(request):
                 client.firstname = firstname
                 client.patronymic = patronymic
                 client.username = username
-                client.status = 'student'
+                if group_in_csv == 'ТЧР':
+                    client.status = 'Преподаватель'
+                elif group_in_csv == 'ЦИТ':
+                    client.status = 'Сотрудник ЦИТа'
+                else:
+                    client.status = 'Студент'
                 client.faculty = Faculty.objects.get(name=list_facultys[group_in_csv])
                 client.group = Group.objects.get_or_create(name=group_in_csv)[0]
                 client.save()
@@ -433,7 +442,13 @@ def upload_file(request):
                 client.firstname = firstname
                 client.patronymic = patronymic
                 client.username = username_for_repeater
-                client.status = 'student'
+                if group_in_csv == 'ТЧР':
+                    client.status = 'Преподаватель'
+                elif group_in_csv == 'ЦИТ':
+                    client.status = 'Сотрудник ЦИТа'
+                else:
+                    client.status = 'Студент'
+
                 client.faculty = Faculty.objects.get(name=list_facultys[group_in_csv])
                 client.group = Group.objects.get_or_create(name=group_in_csv)[0]
                 # if client.username == Client.objects.filter(username=username_for_repeater):
