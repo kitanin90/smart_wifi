@@ -7,7 +7,6 @@ from .views import *
 
 urlpatterns = [
     path('', views.connect, name='connect'),
-    path('code', views.send_code, name='sendcode'),
     path('successful', views.successful_connect, name='successful_connect'),
     path('sendfeedback', FeedbackCreate.as_view(), name='feedback_create_url'),
 

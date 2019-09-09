@@ -20,56 +20,12 @@ from .forms import FeedbackForm
 
 from panel.const import CLEARTEXT_PASSWORD
 from panel.models import Faculty, Client, Building, NAS, Session, ClientParameter, GroupReply, UserGroup, Feedback, Group
-from smart_wifi.settings import SMSC_LOGIN, SMSC_PASSWORD
 
 
 @require_http_methods(["GET"])
 @ensure_csrf_cookie
 def connect(request):
     return render(request, 'captive/index.html')
-
-
-@require_http_methods(["POST"])
-def send_code(request):
-    telephone = request.POST["telephone"]
-
-    if not Client.objects.filter(username=telephone).exists():
-        client = Client()
-
-        client.sms_auth = True
-        client.username = telephone
-        client.telephone = telephone
-
-        client.save()
-
-        user_group = UserGroup()
-
-        user_group.groupname = "sms"
-        user_group.username = telephone
-        user_group.priority = 1
-
-        user_group.save()
-
-    try:
-        client_parameter = ClientParameter.objects.filter(username=telephone, attribute=CLEARTEXT_PASSWORD).get()
-    except ObjectDoesNotExist:
-        client_parameter = ClientParameter()
-
-    client_parameter.username = telephone
-    client_parameter.op = ":="
-    client_parameter.attribute = CLEARTEXT_PASSWORD
-
-    code = ''.join(["%s" % randint(0, 9) for num in range(0, 6)])
-
-    client_parameter.value = code
-
-    client_parameter.save()
-
-    r = requests.post("https://smsc.ru/sys/send.php",
-                      data={'login': SMSC_LOGIN, 'psw': SMSC_PASSWORD, 'phones': "+7" + telephone,
-                            "mes": "WiFi code: " + code})
-
-    return HttpResponse("ok")
 
 
 @require_http_methods(["GET"])
@@ -207,8 +163,7 @@ def report(request):
 def settings(request):
     groups = [
         {"name": "students", "title": "Студенты", "params": []},
-        {"name": "employees", "title": "Сотрудники", "params": []},
-        {"name": "sms", "title": "СМС", "params": []}
+        {"name": "employees", "title": "Сотрудники", "params": []}
     ]
     params = [
         {"name": "Session-Timeout", "title": "Максимальная длительность сессии (секунд)", "multiply": 1},

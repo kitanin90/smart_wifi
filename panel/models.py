@@ -50,16 +50,12 @@ class Client(models.Model):
     username = models.CharField(max_length=64, unique=True)
     status = models.CharField(max_length=255, blank=True, verbose_name="Статус")
 
-    sms_auth = models.BooleanField(default=False, verbose_name="СМС авторизация")
-
-    telephone = models.CharField(max_length=255, verbose_name="Телефон", blank=True)
-
     faculty = models.ForeignKey("Faculty", blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name="Факультет")
 
     group = models.ForeignKey("Group", blank=True, null=True, on_delete=models.DO_NOTHING, verbose_name="Группа")
 
     def fullname(self):
-        return "{} {} {}".format(self.lastname, self.firstname, self.patronymic) if not self.sms_auth else self.username
+        return "{} {} {}".format(self.lastname, self.firstname, self.patronymic)
 
     def __str__(self):
         return self.fullname()

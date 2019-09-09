@@ -39,14 +39,8 @@
                             <p class="card-text">{{ client.faculty.name }}</p>
                             <hr>
 
-                            <h6 class="card-title">Телефон:</h6>
-                            <p class="card-text">{{ client.telephone }}</p>
-                            <hr>
-
-                            {% if not client.sms_auth %}
-                                <h6 class="card-title">Номер зачётной:</h6>
-                                <p class="card-text">{{ client.get_password }}</p>
-                            {% endif %}
+                            <h6 class="card-title">Номер зачётной:</h6>
+                            <p class="card-text">{{ client.get_password }}</p>
 
                             <h6 class="card-title">Статус:</h6>
                             <p class="card-text">{{ client.status }}</p>
