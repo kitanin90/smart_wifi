@@ -151,26 +151,26 @@ p1{
 
 }
 
-/*Глазок пароля*/
-.btn-show-pwd{
+/*Глазок для пароля*/
+.eye{
     position: absolute;
-    right: 5px;
+
+    right: -30px;
     top: 10px;
     font-size: 30px;
-    color: #999;
-    /*color: #222c6a;*/
+    color: #222c6a;
     cursor: pointer;
-    /*margin-left: 1 0px;*/
     opacity: 0.5;
     height: 20px;
     width: 25px;
-    transition: .5s;
+    transition: .2s;
 }
 
-.btn-show-pwd:hover{
+.eye:hover{
     opacity: 1;
 }
 
-.btn-show-pwd:active{
+.eye:active{
     transform: scale(0.9);
 }
+

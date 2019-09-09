@@ -143,31 +143,33 @@
                 <div class="form-group">
                     <div class="input-group">
                         <span><img src="{% static 'captive/img/password.png' %}" height="30px" width="35px"></span>
-                        <input id="password" type="password" class="form-control" placeholder="Пароль">
-                        <img class="btn-show-pwd" data-for="inp-password" src="{% static 'captive/img/eye.svg' %}">
 
-                        <script>
-                            $(function () {
-
-                            $('.btn-show-pwd').hover(function(){
-                                $('input').attr('type', 'text');
-                            },function(){
-                                $('input').attr('type','password');
-                            });
-
-                            });
-                        </script>
-
+                        <input id="password" name="password" type="password" class="form-control" placeholder="Пароль">
+                        <img class="eye slash" name="password" onclick="togglePW()" data-for="inp-password"
+                             src="{% static 'captive/img/eye.svg' %}">
                     </div>
-                </div>
 
-                <button class="btn btn-primary btn-lg" onclick="onClientAuth();">Подключиться</button>
-
-                <div class="form-group">
-                    <a href="sendfeedback">Обратная связь</a>
+                    <script>
+                        function togglePW() {
+                            document.querySelector('.eye').classList.toggle('slash');
+                            var password = document.querySelector('[name=password]');
+                            if (password.getAttribute('type') === 'password') {
+                                password.setAttribute('type', 'text');
+                            } else {
+                                password.setAttribute('type', 'password');
+                            }
+                        }
+                    </script>
                 </div>
             </div>
+
+            <button class="btn btn-primary btn-lg" onclick="onClientAuth();">Подключиться</button>
+
+            <div class="form-group">
+                <a href="sendfeedback">Обратная связь</a>
+            </div>
         </div>
+    </div>
     </div>
     <div class="support" style="margin-top: 10px">
         <div class="down-panel fade show active" id="pills-student" role="tabpanel">
