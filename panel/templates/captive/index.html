@@ -113,6 +113,7 @@
             return cookieValue;
         }
     </script>
+
 </head>
 
 <body class="login-page" style="background: url({% static 'captive/img/frost2.jpg' %}) ;">
@@ -123,16 +124,6 @@
         <img src="{% static 'captive/img/new21.png' %}" alt="Scanfcode" class="img-responsive center-block"
              style="width: 100%;">
 
-        {#        <ul class="nav nav-pills nav-fill" style="margin-top: 20px" id="pills-tab" role="tablist">#}
-        {#            <li class="nav-item">#}
-        {#                <a class="nav-link active" id="pills-student-tab" data-toggle="pill" href="#pills-student" role="tab"#}
-        {#                   aria-controls="pills-student" aria-selected="true">Для студентов</a>#}
-        {#            </li>#}
-        {#            <li class="nav-item">#}
-        {#                <a class="nav-link" id="pills-sms-tab" data-toggle="pill" href="#pills-sms" role="tab"#}
-        {#                   aria-controls="pills-sms" aria-selected="false">По СМС</a>#}
-        {#            </li>#}
-        {#        </ul>#}
         <h2 class="nav-link active" id="pills-student-tab" data-toggle="pill" href="#pills-student" role="tab"
             aria-controls="pills-student" aria-selected="true">Авторизация</h2>
 
@@ -143,6 +134,7 @@
                     <div class="input-group">
                         <span><img src="{% static 'captive/img/user.png' %}" height="30px" width="35px"></span>
                         <input type="text" class="form-control" placeholder="ФИО" id="name">
+
                     </div>
                 </div>
 
@@ -152,6 +144,20 @@
                     <div class="input-group">
                         <span><img src="{% static 'captive/img/password.png' %}" height="30px" width="35px"></span>
                         <input id="password" type="password" class="form-control" placeholder="Пароль">
+                        <img class="btn-show-pwd" data-for="inp-password" src="{% static 'captive/img/eye.svg' %}">
+
+                        <script>
+                            $(function () {
+
+                            $('.btn-show-pwd').hover(function(){
+                                $('input').attr('type', 'text');
+                            },function(){
+                                $('input').attr('type','password');
+                            });
+
+                            });
+                        </script>
+
                     </div>
                 </div>
 
@@ -159,28 +165,6 @@
 
                 <div class="form-group">
                     <a href="sendfeedback">Обратная связь</a>
-                </div>
-            </div>
-
-            <div class="tab-pane fade" id="pills-sms" role="tabpanel" aria-labelledby="pills-sms-tab">
-                <div class="form-group">
-                    <div id="tel-group" class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="">+7</span>
-                        </div>
-                        <input type="tel" class="form-control" placeholder="9999999999" maxlength="10" id="telephone">
-                    </div>
-
-                    <div id="code-group" class="input-group" style="display: none">
-                        <span><img src="{% static 'captive/img/password.png' %}" height="30px" width="30px"></span>
-                        <input type="text" class="form-control" placeholder="Код" maxlength="6" id="code">
-                    </div>
-                </div>
-
-                <button id="code-submit" class="btn btn-primary btn-lg" onclick="onSMSAuth();">Отправить код</button>
-
-                <div class="form-group">
-                    <a href="{% url 'feedback_create_url' %}">Обратная связь</a>
                 </div>
             </div>
         </div>
