@@ -21,17 +21,28 @@
         function onUpdate(cmd) {
             if (chilliController.clientState === 1) {
                 window.location.replace("{% url 'successful_connect' %}");
-            } else {
-                alert("Авторизация не удалась!")
             }
         }
 
-        chilliController.host = "192.168.182.1";
+        chilliController.host = getQueryVariable("uamip");
+        chilliController.port = getQueryVariable("uamport");
         chilliController.onUpdate = onUpdate;
+
+        function showSpinner() {
+            $("#spinner").show();
+        }
+
+        function connectionTimeout() {
+            $("#alert").show();
+            $("#spinner").hide();
+        }
 
         function onClientAuth() {
             var name = document.getElementById("name").value;
             var password = document.getElementById("password").value;
+
+            showSpinner();
+            setTimeout(connectionTimeout, 5000);
 
             chilliController.logon(rus_to_latin(name), rus_to_latin(password));
         }
@@ -103,7 +114,6 @@
                 var cookies = document.cookie.split(';');
                 for (var i = 0; i < cookies.length; i++) {
                     var cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                         break;
@@ -111,6 +121,18 @@
                 }
             }
             return cookieValue;
+        }
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return null;
         }
     </script>
 
@@ -126,6 +148,10 @@
 
         <h2 class="nav-link active" id="pills-student-tab" data-toggle="pill" href="#pills-student" role="tab"
             aria-controls="pills-student" aria-selected="true">Авторизация</h2>
+
+        <div id="alert" class="alert alert-danger" style="display: none;" role="alert">
+            Авторизация не удалась. Попробуйте позже.
+        </div>
 
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-student" role="tabpanel"
@@ -145,7 +171,7 @@
                         <span><img src="{% static 'captive/img/password.png' %}" height="30px" width="35px"></span>
 
                         <input id="password" name="password" type="password" class="form-control" placeholder="Пароль">
-                        <img class="eye slash" name="password" onclick="togglePW()" data-for="inp-password"
+                        <img class="eye slash" onclick="togglePW()" data-for="inp-password"
                              src="{% static 'captive/img/eye.svg' %}">
                     </div>
 
@@ -163,7 +189,11 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary btn-lg" onclick="onClientAuth();">Подключиться</button>
+            <button class="btn btn-primary btn-lg" onclick="onClientAuth();">Подключиться
+                <span id="spinner" class="spinner-border text-light" style="display: none;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </span>
+            </button>
 
             <div class="form-group">
                 <a href="sendfeedback">Обратная связь</a>
@@ -174,7 +204,7 @@
     <div class="support" style="margin-top: 10px">
         <div class="down-panel fade show active" id="pills-student" role="tabpanel">
             <p>Для подключение введите фамилию с инициалами:</p>
-            <p1>"ИвановИИ" или "Петров Иван Макс"</p1>
+            <p>"ИвановИИ" или "Петров Иван Макс"</p>
         </div>
     </div>
 </main>
