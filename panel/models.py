@@ -1,3 +1,5 @@
+from builtins import staticmethod, int, round
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import Sum
@@ -351,7 +353,7 @@ class NAS(models.Model):
     ports = models.IntegerField(null=True, verbose_name="Порт")
     secret = models.CharField(max_length=60, verbose_name="Токен")
     server = models.CharField(max_length=64, blank=True, null=True, verbose_name="Сервер")
-    mac = models.CharField(max_length=50, verbose_name="MAC")
+    mac = models.CharField(max_length=50, null=True, verbose_name="MAC")
 
     building = models.ForeignKey("Building", on_delete=models.DO_NOTHING, verbose_name="Корпус")
 
