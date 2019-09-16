@@ -16,6 +16,40 @@ $ git clone https://github.com/kitanin90/smart_wifi.git
 * Выполнить миграцию `docker-compose exec web python3 manage.py migrate`
 
 
+#Настройка роутеров на примере tp-link archer c7
+1. Скачать прошивку Openwrt "http://downloads.openwrt.org/releases/18.06.4/targets/ar71xx/generic/openwrt-18.06.4-ar71xx-generic-archer-c7-v4-squashfs-factory.bin"
+2. Подключиться к роутеру через сетевой кабель в любой LAN-порт
+3. В админ панель роутера в разделе "fireware upgrade" загрузить скачанный файл прошивки "OpenWrt"
+
+![Alt text](img/img1.jpg?raw=true "Title")
+4. Перейти по 192.168.1.1 (или 192.168.0.1) в админку openwrt. Поставить на роутер пароль.
+5. В разделе "Interfeces" удалить интерфейс WAN6
+6. Настроить интерфейс WAN:
+
+-Ipv4 address - ip адрес роутера
+
+-Ipv4 gateway - ip адрес сервера
+![Alt text](img/img2.jpg?raw=true "Title")
+
+7. Настроить firewall для WAN input включить accept
+
+![Alt text](img/firewall.png?raw=true "Title")
+
+
+**Подключиться к роутеру через WAN**
+
+8. Подключаемся к роутеру по ssh (ssh root@192.168.3.*)и вводим команды для установки необходимого:
+ - opkg update
+ - opkg install python3-light libustream-openssl ca-bundle ca-certificates
+ - wget https://strbsu.tk/configure_router.py
+ 
+9. Далее скачиваем скрипт настройки роутера "wget https://raw.githubusercontent.com/kitanin90/smart_wifi/master/tools/configure_router.py"
+10. python3 configure_router.py 
+11. Отвечаем на два вопроса:
+ - Номер роутера по счету(порядковый)
+ - Ввести любое число
+12. Перезагрузить freeradfius. Перейти в папку проекта и ввести в терминале "docker-compose restart freeradius"
+
 
 # Настройка административной панели Django
 В случае успешного выполнения пунктов, описанных выше Вы сможете зайти в админ.панель Django в браузере перейдя по `localhost/admin`
@@ -60,3 +94,4 @@ $ git clone https://github.com/kitanin90/smart_wifi.git
  * `Корпус`  - Выберите корпус, в котором стоит роутер
 
 **ВНИМАНИЕ!** После изменений в админ.панели Django перезагрузите freeradius командой `docker-compose restart freeradius`
+

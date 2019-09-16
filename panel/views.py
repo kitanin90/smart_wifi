@@ -248,7 +248,7 @@ def upload_file(request):
                 patronymic = fullname[2]
 
             list_facultys = {
-                'ИН': 'ФФ', 'РО': 'ФФ', 'ZМФО': 'ФФ', 'ZРЯ': 'ФФ', 'ZИН': 'ФФ', 'ZРО': 'ФФ',
+                'ИН': 'ФФ', 'РО': 'ФФ', 'ZМФО': 'ФФ', 'ZРЯ': 'ФФ', 'ZИН': 'ФФ', 'ZРО': 'ФФ', 'ZPO': 'ФФ', 'Журн': 'ФФ',
                 'БИН': 'ФБиТЯ', 'ТЧИН': 'ФБиТЯ', 'ТЧО': 'ФБиТЯ', 'ZМСНП': 'ФБиТЯ', 'ZБРЯ': 'ФБиТЯ', 'ZТЧНО': 'ФБиТЯ',
                 'ZБЯ': 'ФБиТЯ', 'ZТЧО': 'ФБиТЯ', 'БИС': 'ФБиТФ', 'БРЯ': 'ФБиТФ',
                 'ИСТ': 'ИстФ', 'ZSТЕО': 'ИстФ', 'ZИСТ': 'ИстФ', 'ZМИСТ': 'ИстФ', 'ИСТО': 'ИстФ',
@@ -284,11 +284,11 @@ def upload_file(request):
                 'ИН': 'Главный корпус', 'РО': 'Главный корпус', 'ZМФО': 'Главный корпус', 'ZРЯ': 'Главный корпус',
                 'ZИН': 'Главный корпус', 'ZРО': 'Главный корпус', 'ZТЧО': 'Главный корпус', 'БИС': 'Главный корпус',
                 'БИН': 'Главный корпус', 'ТЧИН': 'Главный корпус', 'ТЧО': 'Главный корпус', 'ZМСНП': 'Главный корпус',
-                'ZБРЯ': 'Главный корпус', 'ZТЧНО': 'Главный корпус', 'БРЯ': 'Главный корпус',
-                'ZБЯ': 'Главный корпус', 'ИСТО': 'Главный корпус', 'ZИОТФ': 'Главный корпус',
+                'ZБРЯ': 'Главный корпус', 'ZТЧНО': 'Главный корпус', 'БРЯ': 'Главный корпус', 'ZPO': 'Главный корпус',
+                'ZБЯ': 'Главный корпус', 'ИСТО': 'Главный корпус', 'ZИОТФ': 'Главный корпус', 'Журн': 'Главный корпус',
                 'ИСТ': 'Главный корпус', 'ZSТЕО': 'Главный корпус', 'ZИСТ': 'Главный корпус', 'ZМИСТ': 'Главный корпус',
                 'АР': 'Корпус ФМиИТ', 'АИС': 'Корпус ФМиИТ', 'МИ': 'Корпус ФМиИТ', 'МПМИ': 'Корпус ФМиИТ',
-                'МФ': 'Корпус ФМиИТ', 'ПИ': 'Корпус ФМиИТ',  'AP': 'Корпус ФМиИТ',
+                'МФ': 'Корпус ФМиИТ', 'ПИ': 'Корпус ФМиИТ', 'AP': 'Корпус ФМиИТ',
                 'ИНФ': 'Корпус ФМиИТ', 'ПМИ': 'Корпус ФМиИТ', 'ZSПИ': 'Корпус ФМиИТ', 'ZИНФ': 'Корпус ФМиИТ',
                 'ZММИ': 'Корпус ФМиИТ', 'OZМПМИ': 'Корпус ФМиИТ',
                 'ZSПМИ': 'Корпус ФМиИТ',
@@ -312,14 +312,14 @@ def upload_file(request):
                 'SГО': 'Корпус ЮФ', 'ГОС': 'Корпус ЮФ', 'ГРП': 'Корпус ЮФ', 'СПД': 'Корпус ЮФ', 'ЮПД': 'Корпус ЮФ',
                 'SГОС': 'Корпус ЮФ', 'OZSГОС': 'Корпус ЮФ', 'ZПОГМВ': 'Корпус ЮФ',
                 'OZSГРП': 'Корпус ЮФ', 'ZОГМВ': 'Корпус ЮФ', 'ZЮПД': 'Корпус ЮФ', 'OZГОС': 'Корпус ЮФ',
-                'OZГРП': 'Корпус ЮФ', 'ZSГОС': 'Корпус ЮФ',  'Мех': 'Корпус Колледжа',
-                'ZГРП': 'Корпус ЮФ', 'ZГОС': 'Корпус ЮФ', 'ZSГРП': 'Корпус ЮФ',  'Экспл': 'Корпус Колледжа',
+                'OZГРП': 'Корпус ЮФ', 'ZSГОС': 'Корпус ЮФ', 'Мех': 'Корпус Колледжа',
+                'ZГРП': 'Корпус ЮФ', 'ZГОС': 'Корпус ЮФ', 'ZSГРП': 'Корпус ЮФ', 'Экспл': 'Корпус Колледжа',
                 'ЭБД': 'Корпус Колледжа', '2ГС': 'Корпус Колледжа', '2ПСО': 'Корпус Колледжа', '2ЭД': 'Корпус Колледжа',
                 '3БД': 'Корпус Колледжа', 'ГС': 'Корпус Колледжа', 'ПСО': 'Корпус Колледжа', 'Э': 'Корпус Колледжа',
                 '3ГС': 'Корпус Колледжа', '3НО': 'Корпус Колледжа', '3ПСО': 'Корпус Колледжа', '2Э': 'Корпус Колледжа',
                 '3СА': 'Корпус Колледжа', 'БД': 'Корпус Колледжа', 'ZПСО': 'Корпус Колледжа', 'ZЭ': 'Корпус Колледжа',
                 '3Ф': 'Корпус Колледжа', '3Э': 'Корпус Колледжа', '4НО': 'Корпус Колледжа', 'Z3Э': 'Корпус Колледжа',
-                'Z3ПСО': 'Корпус Колледжа', 'СА': 'Корпус Колледжа', 'Ф': 'Корпус Колледжа',  'ПСА': 'Корпус Колледжа',
+                'Z3ПСО': 'Корпус Колледжа', 'СА': 'Корпус Колледжа', 'Ф': 'Корпус Колледжа', 'ПСА': 'Корпус Колледжа',
                 'ZSАФК': 'СОП', 'ZАФК': 'СОП', 'ZФК': 'СОП', 'ZЯНРФ': 'СОП', 'ZОПИПО': 'СОП', 'БЯ': 'СОП',
                 'ZПН': 'СОП', 'ZРЛЗ': 'СОП', 'ZРЛ': 'СОП', 'ZОП': 'СОП', 'ZППС': 'СОП', 'ТИМПО': 'СОП', 'ТТТ': 'СОП',
                 'ТЧР': 'Все Преподаватели', 'ЦИТ': 'Отдел ЦИТ'
@@ -342,12 +342,10 @@ def upload_file(request):
             # group_in_csv
             group_in_csv = re.sub(r"\d+", "", name_group, flags=re.UNICODE)  # Удаляет символы из строки
 
-#           фывф
             password = ClientParameter.translit_pass("{}".format(numberbook))
+
             username = Client.translit(
-                "{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else ""))
-            username_for_repeater = Client.translit_for_repeater(
-                "{}{}{}{}".format(lastname, firstname[0], patronymic[0], group_in_csv if len(patronymic) > 0 else ""))
+                "{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else " "))
 
             if group_in_csv in list_building:
                 if not Building.objects.filter(name=list_building[group_in_csv]):
@@ -392,38 +390,45 @@ def upload_file(request):
                 client_parameter.op = ":="
                 client_parameter.value = password
                 client_parameter.save()
-            else:
-                client = Client()
-                client.lastname = lastname
-                client.firstname = firstname
-                client.patronymic = patronymic
-                client.username = username_for_repeater
-                if group_in_csv == 'ТЧР':
-                    client.status = 'Преподаватель'
-                elif group_in_csv == 'ЦИТ':
-                    client.status = 'Сотрудник ЦИТа'
-                else:
-                    client.status = 'Студент'
 
-                client.faculty = Faculty.objects.get(name=list_facultys[group_in_csv])
-                client.group = Group.objects.get_or_create(name=group_in_csv)[0]
-                # if client.username == Client.objects.filter(username=username_for_repeater):
-                #     pass
-                client.save()
+            if Client.objects.filter(lastname=lastname).exists():
+                if not Client.objects.filter(patronymic=patronymic).exists():
+                    i += 1
 
-                try:
-                    client_parameter = ClientParameter.objects.filter(username=username,
-                                                                      attribute=CLEARTEXT_PASSWORD,
-                                                                      value=password).get()
-                except ObjectDoesNotExist:
+                    client = Client()
+                    client.lastname = lastname
+                    client.firstname = firstname
+                    client.patronymic = patronymic
+                    client.username = "{}{}".format(username, group_in_csv)
+                    if group_in_csv == 'ТЧР':
+                        client.status = 'Преподаватель'
+                    elif group_in_csv == 'ЦИТ':
+                        client.status = 'Сотрудник ЦИТа'
+                    else:
+                        client.status = 'Студент'
+
+                    client.faculty = Faculty.objects.get(name=list_facultys[group_in_csv])
+                    client.group = Group.objects.get_or_create(name=group_in_csv)[0]
+                    client.save()
+
+                    try:
+                        client_parameter = ClientParameter.objects.filter(username=username,
+                                                                          attribute=CLEARTEXT_PASSWORD,
+                                                                          value=password).get()
+                    except ObjectDoesNotExist:
+                        client_parameter = ClientParameter()
+
                     client_parameter = ClientParameter()
+                    client_parameter.username = "{}{}".format(username, group_in_csv)
+                    client_parameter.attribute = CLEARTEXT_PASSWORD
+                    client_parameter.op = ":="
+                    client_parameter.value = password
 
-                client_parameter.username = client.username
-                client_parameter.attribute = CLEARTEXT_PASSWORD
-                client_parameter.op = ":="
-                client_parameter.value = password
+                    client_parameter.save()
 
-                client_parameter.save()
+            if Client.objects.filter(username=username) and Client.objects.filter(lastname=lastname) and \
+                    Client.objects.filter(lastname=lastname) and Client.objects.filter(patronymic=patronymic):
+                continue
 
         return render(request, 'panel/upload_file.html', {'count': i})
     else:

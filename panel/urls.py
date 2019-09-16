@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 from . import dashboard
-
+from django.views.defaults import server_error, page_not_found, permission_denied
 from .views import *
 
 urlpatterns = [
@@ -37,4 +37,7 @@ urlpatterns = [
     path('panel/feedback_list', views.feedbacks_list, name='feedbacks_list'),
 
     path('panel/upload_file', views.upload_file, name='contact_upload'),
+
+    # Error
+
 ]
