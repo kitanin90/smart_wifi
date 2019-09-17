@@ -43,8 +43,8 @@ def auth(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-
-        user = authenticate(request, username=username, password=password)
+        username_login = '{}_{}'.format(username, password)
+        user = authenticate(request, username=username_login, password=password)
 
         if user is not None:
             login(request, user)
@@ -236,7 +236,11 @@ def upload_file(request):
             if len(fullname) < 2:
                 continue
 
-            numberbook = row[6]
+            numberbook = row[6].rsplit('-')[0]
+
+            if row[6] == '':
+                continue
+
             lastname = fullname[0]
             firstname = fullname[1]
 
@@ -344,8 +348,12 @@ def upload_file(request):
 
             password = ClientParameter.translit_pass("{}".format(numberbook))
 
-            username = Client.translit(
+            full = Client.translit(
                 "{}{}{}".format(lastname, firstname[0], patronymic[0] if len(patronymic) > 0 else " "))
+
+            username = Client.translit(
+                "{}_{}".format(full, password)
+            )
 
             if group_in_csv in list_building:
                 if not Building.objects.filter(name=list_building[group_in_csv]):
@@ -390,45 +398,12 @@ def upload_file(request):
                 client_parameter.op = ":="
                 client_parameter.value = password
                 client_parameter.save()
+            else:
+                if Client.objects.filter(username=username):
+                    continue
 
-            if Client.objects.filter(lastname=lastname).exists():
-                if not Client.objects.filter(patronymic=patronymic).exists():
-                    i += 1
 
-                    client = Client()
-                    client.lastname = lastname
-                    client.firstname = firstname
-                    client.patronymic = patronymic
-                    client.username = "{}{}".format(username, group_in_csv)
-                    if group_in_csv == 'ТЧР':
-                        client.status = 'Преподаватель'
-                    elif group_in_csv == 'ЦИТ':
-                        client.status = 'Сотрудник ЦИТа'
-                    else:
-                        client.status = 'Студент'
 
-                    client.faculty = Faculty.objects.get(name=list_facultys[group_in_csv])
-                    client.group = Group.objects.get_or_create(name=group_in_csv)[0]
-                    client.save()
-
-                    try:
-                        client_parameter = ClientParameter.objects.filter(username=username,
-                                                                          attribute=CLEARTEXT_PASSWORD,
-                                                                          value=password).get()
-                    except ObjectDoesNotExist:
-                        client_parameter = ClientParameter()
-
-                    client_parameter = ClientParameter()
-                    client_parameter.username = "{}{}".format(username, group_in_csv)
-                    client_parameter.attribute = CLEARTEXT_PASSWORD
-                    client_parameter.op = ":="
-                    client_parameter.value = password
-
-                    client_parameter.save()
-
-            if Client.objects.filter(username=username) and Client.objects.filter(lastname=lastname) and \
-                    Client.objects.filter(lastname=lastname) and Client.objects.filter(patronymic=patronymic):
-                continue
 
         return render(request, 'panel/upload_file.html', {'count': i})
     else:

@@ -49,39 +49,6 @@
 
         var isCodeSent = false;
 
-        function onSMSAuth() {
-            var tel = document.getElementById("telephone").value;
-
-            if (!isCodeSent) {
-                if (tel.length < 10) {
-                    return;
-                }
-
-                var data = new FormData();
-                data.append('telephone', tel);
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'code', true);
-                xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-                xhr.onload = function () {
-                    document.getElementById("tel-group").style.display = 'none';
-                    document.getElementById("code-group").style.display = 'flex';
-
-                    document.getElementById("code-submit").innerText = 'Подключиться';
-
-                    isCodeSent = true;
-                };
-                xhr.send(data);
-            } else {
-                if (tel.length < 6) {
-                    return;
-                }
-
-                var code = document.getElementById("code").value;
-
-                chilliController.logon(tel, code);
-            }
-        }
 
         function rus_to_latin(str) {
             var ru = {
@@ -201,12 +168,12 @@
         </div>
     </div>
     </div>
-    <div class="support" style="margin-top: 10px">
-        <div class="down-panel fade show active" id="pills-student" role="tabpanel">
-            <p>Для подключение введите фамилию с инициалами:</p>
-            <p>"ИвановИИ" или "Петров Иван Макс"</p>
-        </div>
-    </div>
+{#    <div class="support" style="margin-top: 10px">#}
+{#        <div class="down-panel fade show active" id="pills-student" role="tabpanel">#}
+{#            <p>Для подключение введите фамилию с инициалами:</p>#}
+{#            <p>"ИвановИИ" или "Петров Иван Макс"</p>#}
+{#        </div>#}
+{#    </div>#}
 </main>
 </body>
 </html>

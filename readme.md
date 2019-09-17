@@ -16,7 +16,7 @@ $ git clone https://github.com/kitanin90/smart_wifi.git
 * Выполнить миграцию `docker-compose exec web python3 manage.py migrate`
 
 
-#Настройка роутеров на примере tp-link archer c7
+# Настройка роутеров на примере tp-link archer c7
 1. Скачать прошивку Openwrt "http://downloads.openwrt.org/releases/18.06.4/targets/ar71xx/generic/openwrt-18.06.4-ar71xx-generic-archer-c7-v4-squashfs-factory.bin"
 2. Подключиться к роутеру через сетевой кабель в любой LAN-порт
 3. В админ панель роутера в разделе "fireware upgrade" загрузить скачанный файл прошивки "OpenWrt"
@@ -31,6 +31,7 @@ $ git clone https://github.com/kitanin90/smart_wifi.git
 -Ipv4 gateway - ip адрес сервера
 ![Alt text](img/img2.jpg?raw=true "Title")
 
+**Внимание! Не забудьте в конце поставить галочку около "Ignore interface"**
 7. Настроить firewall для WAN input включить accept
 
 ![Alt text](img/firewall.png?raw=true "Title")
@@ -42,7 +43,10 @@ $ git clone https://github.com/kitanin90/smart_wifi.git
  - opkg update
  - opkg install python3-light libustream-openssl ca-bundle ca-certificates
  - wget https://strbsu.tk/configure_router.py
- 
+
+При первом подключении через ssh, возможно выйдет оповещение. Достаточно просто скопировать и ввести строку начинающееся на "ssh-keygen -f ...". Можете заново повторить подключение
+![Alt text](img/img3.jpg?raw=true "Title")
+
 9. Далее скачиваем скрипт настройки роутера "wget https://raw.githubusercontent.com/kitanin90/smart_wifi/master/tools/configure_router.py"
 10. python3 configure_router.py 
 11. Отвечаем на два вопроса:
