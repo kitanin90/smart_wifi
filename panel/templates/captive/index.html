@@ -40,11 +40,12 @@
         function onClientAuth() {
             var name = document.getElementById("name").value;
             var password = document.getElementById("password").value;
+            var full_username = (name + '_' + password);
 
             showSpinner();
             setTimeout(connectionTimeout, 5000);
 
-            chilliController.logon(rus_to_latin(name), rus_to_latin(password));
+            chilliController.logon(rus_to_latin(full_username), rus_to_latin(password));
         }
 
         var isCodeSent = false;
