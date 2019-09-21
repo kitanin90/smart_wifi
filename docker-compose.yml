@@ -9,6 +9,11 @@ services:
     ports:
       - "3306:3306"
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    logging:
+      driver: "json-file"
+      options:
+        max-file: '5'
+        max-size: '10m'
   web:
     build: .
     command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
@@ -21,6 +26,11 @@ services:
       - ./:/code
     depends_on:
       - db
+    logging:
+      driver: "json-file"
+      options:
+        max-file: '5'
+        max-size: '10m'
   freeradius:
     build: ./freeradius/
     restart: always
@@ -32,6 +42,11 @@ services:
     depends_on:
       - db
       - web
+    logging:
+      driver: "json-file"
+      options:
+        max-file: '5'
+        max-size: '10m'
   flow-collector:
     build: ./flow-collector
     restart: always
@@ -39,3 +54,8 @@ services:
       - "555:555/udp"
     env_file:
       - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-file: '5'
+        max-size: '10m'
