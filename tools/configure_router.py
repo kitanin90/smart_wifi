@@ -43,7 +43,7 @@ setUCIOptions("system", "", "@system[0]", {
 print("Configure network")
 setUCIOptions("network", "", "wan", {
     "proto": "static",
-    "ipaddr": "192.168.3.{}".format(router_num + 1),
+    "ipaddr": "192.168.3.{}".format(router_num),
     "netmask": "255.255.252.0",
     "gateway": "192.168.1.141",
     "dns": "8.8.8.8"
@@ -100,8 +100,8 @@ setUCIOptions("chilli", "chilli", "@chilli[0]", {
     "debug": "9",
     "dns1": "8.8.8.8",
     "dns2": "8.8.4.4",
-    "radiusserver1": "192.168.3.1",
-    "radiusserver2": "192.168.3.1",
+    "radiusserver1": "192.168.1.75",
+    "radiusserver2": "192.168.1.75",
     "radiussecret": radiussecret,
     "dhcpif": "br-lan",
     "uamserver": "http://192.168.182.1/"
@@ -117,7 +117,7 @@ setUCIOptions("softflowd", "softflowd", "@softflowd[0]", {
     "pcap_file": "",
     "timeout": "",
     "max_flows": "8192",
-    "host_port": "192.168.3.1:555",
+    "host_port": "192.168.1.75:555",
     "pid_file": "/var/run/softflowd.pid",
     "control_socket": "/var/run/softflowd.ctl",
     "export_version": "5",
@@ -128,8 +128,8 @@ setUCIOptions("softflowd", "softflowd", "@softflowd[0]", {
 }, True)
 
 print("Configure uhttpd")
-setUCIOption("uhttpd.main.listen_http", "192.168.3.{}:80".format(router_num + 1))
-setUCIOption("uhttpd.main.listen_https", "192.168.3.{}:443".format(router_num + 1))
+setUCIOption("uhttpd.main.listen_http", "192.168.3.{}:80".format(router_num))
+setUCIOption("uhttpd.main.listen_https", "192.168.3.{}:443".format(router_num))
 
 print("Configure Dropbear")
 setUCIOption("dropbear.@dropbear[0].Interface", "wan")
@@ -152,7 +152,7 @@ http {
         server_name localhost;
         root /www/;
         location / {
-            proxy_pass http://192.168.3.1;
+            proxy_pass http://192.168.1.75;
             proxy_set_header Host localhost;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             proxy_set_header X-Real-IP $remote_addr;
@@ -162,7 +162,7 @@ http {
             internal;
         }
     }
-}""".replace("{num}", str(router_num))
+}"""
 nginx_conf_file = open("/etc/nginx/nginx.conf", "w")
 nginx_conf_file.write(nginx_conf)
 nginx_conf_file.close()
