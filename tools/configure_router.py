@@ -43,7 +43,7 @@ setUCIOptions("system", "", "@system[0]", {
 print("Configure network")
 setUCIOptions("network", "", "wan", {
     "proto": "static",
-    "ipaddr": "192.168.3.{}".format(router_num),
+    "ipaddr": "192.168.1.{}".format(router_num + 75),
     "netmask": "255.255.252.0",
     "gateway": "192.168.1.141",
     "dns": "8.8.8.8"
@@ -128,8 +128,8 @@ setUCIOptions("softflowd", "softflowd", "@softflowd[0]", {
 }, True)
 
 print("Configure uhttpd")
-setUCIOption("uhttpd.main.listen_http", "192.168.3.{}:80".format(router_num))
-setUCIOption("uhttpd.main.listen_https", "192.168.3.{}:443".format(router_num))
+setUCIOption("uhttpd.main.listen_http", "192.168.1.{}:80".format(router_num + 75))
+setUCIOption("uhttpd.main.listen_https", "192.168.1.{}:443".format(router_num + 75))
 
 print("Configure Dropbear")
 setUCIOption("dropbear.@dropbear[0].Interface", "wan")
