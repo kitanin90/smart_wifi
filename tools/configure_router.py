@@ -63,28 +63,44 @@ setUCIOptions("dhcp", "", "wan", {
 })
 
 print("Configure wireless")
-setUCIOptions("wireless", "", "radio0", {
-    "legacy_rates": "1",
-    "htmode": "VHT20",
-    "channel": "auto",
-    "country": "RU",
-    "disabled": "0"
-})
-setUCIOptions("wireless", "", "radio1", {
-    "legacy_rates": "1",
-    "htmode": "HT20",
-    "channel": "auto",
-    "country": "RU",
-    "disabled": "0"
-})
-setUCIOptions("wireless", "", "default_radio0", {
-    "ssid": "SFBSU_FREE_WIFI{}_5G".format(router_num),
-    "isolate": "1"
-})
-setUCIOptions("wireless", "", "default_radio1", {
-    "ssid": "SFBSU_FREE_WIFI{}".format(router_num),
-    "isolate": "1"
-})
+process = subprocess.Popen("/sbin/uci get wireless.radio1".split(), stdout=subprocess.PIPE)
+result, _ = process.communicate()
+
+if ("Entry not found" in result):
+    setUCIOptions("wireless", "", "radio0", {
+        "legacy_rates": "1",
+        "htmode": "HT20",
+        "channel": "auto",
+        "country": "RU",
+        "disabled": "0"
+    })
+    setUCIOptions("wireless", "", "default_radio0", {
+        "ssid": "SFBSU_FREE_WIFI{}".format(router_num),
+        "isolate": "1"
+    })
+else:
+    setUCIOptions("wireless", "", "radio0", {
+        "legacy_rates": "1",
+        "htmode": "VHT20",
+        "channel": "auto",
+        "country": "RU",
+        "disabled": "0"
+    })
+    setUCIOptions("wireless", "", "radio1", {
+        "legacy_rates": "1",
+        "htmode": "HT20",
+        "channel": "auto",
+        "country": "RU",
+        "disabled": "0"
+    })
+    setUCIOptions("wireless", "", "default_radio0", {
+        "ssid": "SFBSU_FREE_WIFI{}_5G".format(router_num),
+        "isolate": "1"
+    })
+    setUCIOptions("wireless", "", "default_radio1", {
+        "ssid": "SFBSU_FREE_WIFI{}".format(router_num),
+        "isolate": "1"
+    })
 
 print("Update opkg packages list")
 process = subprocess.Popen("/bin/opkg update".split(), stdout=subprocess.PIPE)
